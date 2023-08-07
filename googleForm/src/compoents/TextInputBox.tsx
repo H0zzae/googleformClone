@@ -1,5 +1,5 @@
 import React from "react";
-
+import {TextInputDiv} from "./ComponentStyle"
 interface TextItem {
     id?: number,
     title?: string,
@@ -8,9 +8,9 @@ interface TextItem {
 }
 
 export const TextInputBox = (ti:TextItem)=>{
-        return(
-            <>
-            <p>{ti.title}</p>
-            </>
-        )
+    return(
+        <TextInputDiv>
+        <p>{ti.title}</p>
+        </TextInputDiv>
+    )
 }

@@ -14,14 +14,14 @@ function App() {
     ))
   }
   return (
-  <>
+  <div className={"wrap"}>
     <Form />
     {/*<Counter />*/}
     {/*<hr />*/}
     {/*<Todo />*/}
     {/*<p />*/}
     {/*<button onClick={getUser}>[API TEST(GET)]</button>*/}
-  </>
+  </div>
   );
 }
 

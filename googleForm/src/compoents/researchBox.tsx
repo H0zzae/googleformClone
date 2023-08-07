@@ -1,10 +1,19 @@
-import React from "react";
+import React, {useState} from "react";
 import {TextInputBox} from "./TextInputBox";
+import * as style from "./ComponentStyle";
+import {ResearchBottomSection} from "./ResearchBottomSection";
 
-export const ResearchBox = ()=> {
+export interface ResearchBoxInfo {
+    id ?: number | undefined;
+    title ?: string | undefined;
+    type ?: string
+}
+export const ResearchBox = (researchBoxInfo:ResearchBoxInfo)=> {
+
     return (
-        <>
-            <TextInputBox title = "hi"/>
-        </>
+        <style.ResearchDiv>
+            <TextInputBox title={researchBoxInfo.title}/>
+            <ResearchBottomSection id={researchBoxInfo.id}/>
+        </style.ResearchDiv>
     )
 }

@@ -1,7 +1,17 @@
 import styled from "styled-components";
 import ReactDragList from "react-drag-list";
-
-export const GroupBox = styled(ReactDragList)`
+import {Select} from "@mui/material";
+interface Attribute {
+    height ?:number;
+    width ?:number;
+    paddingTop ?:number;
+    paddingBottom ?:number;
+    paddingRight ?:number;
+    paddingLeft?:number;
+    gap ?:number;
+    justifyContent ?:string;
+}
+export const DragList = styled(ReactDragList)`
     
 `;
 

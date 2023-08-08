@@ -4,8 +4,8 @@ import * as style from "./ComponentStyle";
 import {ResearchBottomSection} from "./ResearchBottomSection";
 
 export interface ResearchBoxInfo {
-    id ?: number | undefined;
-    title ?: string | undefined;
+    id ?: number;
+    title ?: string;
     type ?: string
 }
 export const ResearchBox = (researchBoxInfo:ResearchBoxInfo)=> {

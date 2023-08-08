@@ -1,15 +1,16 @@
 import React, {useState} from "react";
-import {TextInputBox, ResearchBox} from "../../compoents";
+import {ResearchBox, ShortAnswerType} from "../../compoents";
 import * as style from "../../compoents/ComponentStyle";
 import {FormSection} from "./formStyle";
+import {DragList} from "../../compoents/ComponentStyle";
 
 const Form = () =>{
-    const [itemList, setItemList] = useState<any[]>([{sort : 1, title : "one", id : 0, type : "text"}, {sort:2, title : "two", id : 1, type : "text"}]);
+    const [itemList, setItemList] = useState<any[]>([{sort : 1, title : "one", id : 0, type : "shortAnswer"}, {sort:2, title : "two", id : 1, type : "text"}]);
 
     // 브라우저 상에 보여지는 데이터 리스트
     const dragList = (record: any, id: number) => (
 
-        <ResearchBox title={record.title} id={id}/>
+        <ResearchBox title={record.title} id={id} type={record.type}/>
         // 여기서 record는 dataSource로 itemList이다.
         // <div key={index}>
         //     <TextInputBox />
@@ -26,7 +27,7 @@ const Form = () =>{
     );
     return(
         <FormSection>
-            <style.GroupBox
+            <style.DragList
                 dataSource={itemList}//렌더링할 데이터 레코드 배열
                 rowKey='id'//렌더링할 행 키
                 row={dragList}  //렌더링할 행 데이터
@@ -35,7 +36,6 @@ const Form = () =>{
                 rowClassName='simple-drag-row'
                 // onUpdate={handleUpdate} //정렬 목록이 변경될 때 호출됨
             />
-            <TextInputBox title = "hi"/>
         </FormSection>
     )
 }

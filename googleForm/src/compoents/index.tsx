@@ -1,2 +1,3 @@
 export {ResearchBox} from "./researchBox";
-export {TextInputBox} from "./TextInputBox";
+export {ShortAnswerType} from "./ShortAnswerType";
+export {OptionType} from "./OptionType";

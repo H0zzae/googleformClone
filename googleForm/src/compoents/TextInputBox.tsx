@@ -1,5 +1,6 @@
 import React from "react";
-import {TextInputDiv} from "./ComponentStyle"
+import {FlexLeftRow, TextInputDiv} from "./ComponentStyle"
+import {TextField} from "@mui/material";
 interface TextItem {
     id?: number,
     title?: string,
@@ -7,10 +8,17 @@ interface TextItem {
     activated?: boolean,
 }
 
-export const TextInputBox = (ti:TextItem)=>{
-    return(
-        <TextInputDiv>
-        <p>{ti.title}</p>
-        </TextInputDiv>
-    )
+export const TextInputBox = (info:TextItem)=>{
+    return (
+        <FlexLeftRow justifyContent={'space-between'}>
+            <TextField
+                hiddenLabel
+                id="filled-hidden-label-normal"
+                defaultValue={"이름"}
+                value={info.title}
+                variant="filled"
+                sx={{width : 446, padding : 0}}
+            />
+        </FlexLeftRow>
+    );
 }

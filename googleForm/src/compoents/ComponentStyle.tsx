@@ -19,3 +19,49 @@ export const ResearchDiv = styled.div`
 export const TextInputDiv = styled.div`
   padding: 0 12px 0 12px;
 `;
+export const FlexTopColumn = styled.div<Attribute>`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  height: 100%;
+  padding-left: ${props => props.paddingLeft || 0}px;
+  padding-right: ${props => props.paddingRight || 0}px;
+  padding-bottom: ${props => props.paddingBottom||0}px;
+  padding-top: ${props => props.paddingTop||0}px;
+  gap : ${props => props.gap || 0}px;
+`;
+export const FlexLeftRow = styled.div<Attribute>`
+  display : flex;
+  flex-direction: row;
+  justify-content: ${props => props.justifyContent || 'flex-start'};
+  align-items: center;
+  height: 100%;
+  padding-left: ${props => props.paddingLeft || 0}px;
+  padding-right: ${props => props.paddingRight || 0}px;
+  padding-bottom: ${props => props.paddingBottom||0}px;
+  padding-top: ${props => props.paddingTop||0}px;
+  gap : ${props => props.gap || 0}px;
+`;
+
+export const FlexRightRow = styled.div<Attribute>`
+  display : flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  height: 100%;
+  padding-left: ${props => props.paddingLeft || 0}px;
+  padding-right: ${props => props.paddingRight || 0}px;
+  padding-bottom: ${props => props.paddingBottom||0}px;
+  padding-top: ${props => props.paddingTop||0}px;
+  gap : ${props => props.gap || 0}px;
+`;
+
+export const CustomHeightDiv = styled.div<Attribute>`
+  height : ${props => props.height+'px' || 'fit-content'};
+  padding-top : ${props => props.paddingTop||0}px
+`;
+
+export const SelectBox = styled(Select)`
+  padding: 0;
+`;

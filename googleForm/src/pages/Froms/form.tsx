@@ -5,7 +5,13 @@ import {FormSection} from "./formStyle";
 import {DragList} from "../../compoents/ComponentStyle";
 
 const Form = () =>{
-    const [itemList, setItemList] = useState<any[]>([{sort : 1, title : "one", id : 0, type : "shortAnswer"}, {sort:2, title : "two", id : 1, type : "text"}]);
+    const [itemList, setItemList] = useState<any[]>([
+        {sort : 1, title : "one", id : 0, type : "shortAnswer"},
+        {sort : 2, title : "two", id : 1, type : "longAnswer"},
+        {sort : 3, title : "two", id : 2, type : "multipleChoice"},
+        {sort : 4, title : "two", id : 3, type : "checkBox"},
+        {sort : 5, title : "two", id : 4, type : "dropDown"},
+    ]);
 
     // 브라우저 상에 보여지는 데이터 리스트
     const dragList = (record: any, id: number) => (

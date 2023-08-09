@@ -18,7 +18,7 @@ export const ShortAnswerType = (sainfo:shortAnswerInfo) => {
                 <ImageOutlinedIcon sx={{fontSize: 24}}/>
                 <AnswerTypeSelect type={sainfo.type}/>
             </FlexLeftRow>
-            <FlexLeftRow justifyContent={'space-between'}>
+            <FlexLeftRow>
                 <ShortAnswerInputBox  text={sainfo.text}/>
             </FlexLeftRow>
         </FlexTopColumn>

@@ -27,3 +27,6 @@ code {
   padding-bottom: 8px;
   padding-left: 0;
 }
+.MuiFormGroup-root .MuiRadio-root {
+  padding-left: 0;
+}

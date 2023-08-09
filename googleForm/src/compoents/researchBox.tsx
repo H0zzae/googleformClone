@@ -19,7 +19,7 @@ export const ResearchBox = (researchBoxInfo:ResearchBoxInfo)=> {
             :researchBoxInfo.type ==='longAnswer' ?
                 <LongAnswerType type={researchBoxInfo.type} />
             :researchBoxInfo.type ==='multipleChoice'?
-                <OptionType />
+                <OptionType type={researchBoxInfo.type}/>
             :<div>아직구현안됨</div>
             }
             <ResearchBottomSection id={researchBoxInfo.id}/>

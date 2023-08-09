@@ -74,4 +74,5 @@ export const CustomHeightDiv = styled.div<Attribute>`
 
 export const SelectBox = styled(Select)`
   padding: 0;
-`;
+`
+

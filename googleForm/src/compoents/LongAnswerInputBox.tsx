@@ -7,6 +7,6 @@ interface LongAnswerInfo {
 const ariaLabel = {'arial-label' : 'description'};
 export const LongAnswerInputBox = (linfo:LongAnswerInfo) =>{
     return(
-        <Input defaultValue="장문형 텍스트" multiline value = {linfo.text} inputProps={ariaLabel} disabled sx={{height : 48, width:'100%'}} />
+        <Input defaultValue="장문형 텍스트" multiline value = {linfo.text} inputProps={ariaLabel} disabled sx={{margin: '9px 0', width:'100%'}} />
     )
 }

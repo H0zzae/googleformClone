@@ -21,7 +21,9 @@ code {
   justify-content: center;
   padding-top: 12px;
   background-color: #f0ebf8;
-  height: calc(100vh - 12px);
+  min-height: calc(100vh - 12px);
+  height: fit-content;
+  padding-bottom : 80px;
 }
 #demo-simple-select-helper {
   padding-top: 8px;

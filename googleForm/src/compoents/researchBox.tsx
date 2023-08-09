@@ -9,6 +9,7 @@ import {TextInputBox} from "./TextInputBox";
 import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
 import {AnswerTypeSelect} from "./AnswerTypeSelect";
 import {CheckBoxType} from "./CheckBoxType";
+import {DropDownType} from "./DropDownType";
 
 export interface ResearchBoxInfo {
     id ?: number;
@@ -32,6 +33,7 @@ export const ResearchBox = (researchBoxInfo:ResearchBoxInfo)=> {
                 <OptionType />
             :researchBoxInfo.type === 'checkBox' ?
                 <CheckBoxType />
+            : <DropDownType />
             }
             <ResearchBottomSection id={researchBoxInfo.id}/>
         </style.ResearchDiv>

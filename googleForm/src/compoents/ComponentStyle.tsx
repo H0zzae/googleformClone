@@ -23,6 +23,7 @@ export const ResearchDiv = styled.div`
   //activate
   //box-shadow: 0 2px 1px -1px rgba(0,0,0,0.2), 0 1px 1px 0 rgba(0,0,0,0.141), 0 1px 3px 0 rgba(0,0,0,0.122);;
   border-radius: 8px;
+  padding : 0 24px;
   //border : 0, 0, 0, 4px;
 `;
 

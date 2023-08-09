@@ -4,6 +4,11 @@ import {ResearchBottomSection} from "./ResearchBottomSection";
 import {OptionType} from "./OptionType";
 import {ShortAnswerType} from "./ShortAnswerType";
 import {LongAnswerType} from "./LongAnswerType";
+import {FlexLeftRow} from "./ComponentStyle";
+import {TextInputBox} from "./TextInputBox";
+import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
+import {AnswerTypeSelect} from "./AnswerTypeSelect";
+import {CheckBoxType} from "./CheckBoxType";
 
 export interface ResearchBoxInfo {
     id ?: number;
@@ -14,13 +19,19 @@ export const ResearchBox = (researchBoxInfo:ResearchBoxInfo)=> {
 
     return (
         <style.ResearchDiv>
+            <FlexLeftRow justifyContent={'space-between'} gap={8}>
+                <TextInputBox title={researchBoxInfo.title}/>
+                <ImageOutlinedIcon sx={{fontSize: 24}}/>
+                <AnswerTypeSelect type={researchBoxInfo.type}/>
+            </FlexLeftRow>
             {researchBoxInfo.type ==="shortAnswer"?
-                <ShortAnswerType type={researchBoxInfo.type}/>
+                <ShortAnswerType />
             :researchBoxInfo.type ==='longAnswer' ?
-                <LongAnswerType type={researchBoxInfo.type} />
+                <LongAnswerType />
             :researchBoxInfo.type ==='multipleChoice'?
-                <OptionType type={researchBoxInfo.type}/>
-            :<div>아직구현안됨</div>
+                <OptionType />
+            :researchBoxInfo.type === 'checkBox' ?
+                <CheckBoxType />
             }
             <ResearchBottomSection id={researchBoxInfo.id}/>
         </style.ResearchDiv>

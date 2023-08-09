@@ -1,18 +1,18 @@
 import React from "react"
 import {FlexTopColumn} from "./ComponentStyle";
-import {MultipleChoiceOption} from "./MultipleChoiceOption";
+import {CheckBoxOption} from "./CheckBoxOption";
 
-interface optionTypeinfo {
+interface CheckBoxTypeinfo {
     title?: string;
     type ?:string;
 }
-export const OptionType = (oinfo:optionTypeinfo) => {
+export const CheckBoxType = (cinfo:CheckBoxTypeinfo) => {
 
     return(
         <>
             <FlexTopColumn >
                 <FlexTopColumn>
-                    <MultipleChoiceOption />
+                    <CheckBoxOption />
                 </FlexTopColumn>
             </FlexTopColumn>
         </>

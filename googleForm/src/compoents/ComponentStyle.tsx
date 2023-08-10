@@ -77,3 +77,21 @@ export const SelectBox = styled(Select)`
   padding: 0;
 `
 
+export const FloatingBar = styled.div`
+  width: 48px;
+  display: flex;
+  position: absolute;
+  top: 150px;
+  right: -62px;
+  flex-direction: column;
+  align-items: center;
+  -webkit-transition: all .3s cubic-bezier(0.4,0,0.2,1);
+  transition: all .3s cubic-bezier(0.4,0,0.2,1);
+  border: 1px solid #dadce0;
+  background-color : #fff;
+  margin-top: 12px;
+  box-shadow: 1px 1px 0 rgba(0,0,0,.1), 0 -1px 0 rgba(0,0,0,.07), 0 2px 1px -1px rgba(0,0,0,0.2), 0 1px 1px 0 rgba(0,0,0,0.141), 0 1px 3px 0 rgba(0,0,0,0.122);
+  border-radius: 8px;
+  gap:2px;
+  padding : 8px 0;
+`;

@@ -5,4 +5,7 @@ export const FormSection = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;
+  position: absolute;
+  overflow: visible;
+  padding-bottom: 80px;
 `;

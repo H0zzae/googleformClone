@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {ResearchBox, ShortAnswerType, TitleSection} from "../../compoents";
+import {MenuBar, ResearchBox, ShortAnswerType, TitleSection} from "../../compoents";
 import * as style from "../../compoents/ComponentStyle";
 import {FormSection} from "./formStyle";
 import {DragList} from "../../compoents/ComponentStyle";
@@ -33,6 +33,7 @@ const Form = () =>{
     );
     return(
         <FormSection>
+            <MenuBar />
             <TitleSection />
             <style.DragList
                 dataSource={itemList}//렌더링할 데이터 레코드 배열

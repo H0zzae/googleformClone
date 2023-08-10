@@ -8,6 +8,10 @@ body, p {
   -moz-osx-font-smoothing: grayscale;
 }
 
+body {
+  background-color: #f0ebf8;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -17,13 +21,9 @@ code {
   min-width: 770px;
   margin: 0 auto;
   display: flex;
+  padding-top: 12px;
   align-content: center;
   justify-content: center;
-  padding-top: 12px;
-  background-color: #f0ebf8;
-  min-height: calc(100vh - 12px);
-  height: fit-content;
-  padding-bottom : 80px;
 }
 #demo-simple-select-helper {
   padding-top: 8px;

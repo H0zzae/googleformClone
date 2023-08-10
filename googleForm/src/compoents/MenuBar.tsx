@@ -1,5 +1,6 @@
 import React from "react"
 import Tooltip from "@mui/material/Tooltip";
+import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import NoteAddOutlinedIcon from '@mui/icons-material/NoteAddOutlined';
 import TextFieldsOutlinedIcon from '@mui/icons-material/TextFieldsOutlined';
@@ -12,6 +13,11 @@ import {FloatingBar} from "./ComponentStyle";
 export const MenuBar = () => {
     return(
         <FloatingBar>
+            <Tooltip title={"미리보기"}>
+                <IconButton>
+                    <RemoveRedEyeOutlinedIcon />
+                </IconButton>
+            </Tooltip>
             <Tooltip title={"질문 추가"}>
                 <IconButton>
                     <AddCircleOutlineIcon />

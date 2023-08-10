@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {MenuBar, ResearchBox, ShortAnswerType, TitleSection} from "../../compoents";
+import {MenuBar, ResearchBox, ShortAnswerType, SubmitSection, TitleSection} from "../../compoents";
 import * as style from "../../compoents/ComponentStyle";
 import {FormSection} from "./formStyle";
 import {DragList} from "../../compoents/ComponentStyle";
@@ -15,7 +15,6 @@ const Form = () =>{
 
     // 브라우저 상에 보여지는 데이터 리스트
     const dragList = (record: any, id: number) => (
-
         <ResearchBox title={record.title} id={id} type={record.type}/>
         // 여기서 record는 dataSource로 itemList이다.
         // <div key={index}>
@@ -44,6 +43,7 @@ const Form = () =>{
                 rowClassName='simple-drag-row'
                 // onUpdate={handleUpdate} //정렬 목록이 변경될 때 호출됨
             />
+            <SubmitSection />
         </FormSection>
     )
 }

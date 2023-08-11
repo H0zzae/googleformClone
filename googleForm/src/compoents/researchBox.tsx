@@ -12,7 +12,7 @@ import {CheckBoxType} from "./CheckBoxType";
 import {DropDownType} from "./DropDownType";
 
 export interface ResearchBoxInfo {
-    id ?: number;
+    id : number;
     title ?: string;
     type ?: string
 }
@@ -35,7 +35,7 @@ export const ResearchBox = (researchBoxInfo:ResearchBoxInfo)=> {
                 <CheckBoxType />
             : <DropDownType />
             }
-            <ResearchBottomSection id={researchBoxInfo.id}/>
+            <ResearchBottomSection id={researchBoxInfo.id} />
         </style.ResearchDiv>
     )
 }

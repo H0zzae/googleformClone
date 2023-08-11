@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useCallback} from "react"
 import {IconButton, Menu, MenuItem, Switch,FormControlLabel, FormControl, FormGroup} from "@mui/material";
 import Divider from "@mui/material/Divider";
 import MoreVertIcon from '@mui/icons-material/MoreVert';
@@ -9,14 +9,19 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Check from '@mui/icons-material/Check';
 import {CustomHeightDiv, FlexRightRow} from "./ComponentStyle";
+import {useAppDispatch, useAppSelector} from "../users/config";
+import {setForm} from "../users/slices/formSlice";
 
 export interface BottomSectionInfo {
-    id : number | undefined
+    id : number;
 }
 const options = ['개제', '설명', '답변을 기준으로 섹션 이동'];
 const shuffles = ['옵션 순서 무작위로 섞기']
 
 export const ResearchBottomSection = (info:BottomSectionInfo) =>{
+    const {formList} = useAppSelector(state => state.form);
+    const dispatch = useAppDispatch();
+
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
     const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -25,6 +30,14 @@ export const ResearchBottomSection = (info:BottomSectionInfo) =>{
     const handleClose = () => {
         setAnchorEl(null);
     };
+    const RemoveForm = useCallback((id : number) => {
+        const setFormList = [...formList];
+        const removeIndex = setFormList.findIndex(item => item.id === id);
+
+        setFormList.splice(removeIndex, 1);
+        dispatch(setForm(setFormList));
+    },[dispatch, formList]);
+
     return (
         <CustomHeightDiv height={65} paddingTop={24}>
             <Divider variant="middle" />
@@ -36,7 +49,7 @@ export const ResearchBottomSection = (info:BottomSectionInfo) =>{
                         </IconButton>
                     </Tooltip>
                     <Tooltip title="삭제">
-                        <IconButton aria-label="delete">
+                        <IconButton aria-label="delete" onClick={() => RemoveForm(info.id)}>
                             <DeleteIcon sx={{fontSize : 24}}/>
                         </IconButton>
                     </Tooltip>

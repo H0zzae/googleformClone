@@ -20,30 +20,11 @@ const Form = () =>{
     const {formList} = useAppSelector(state => state.form);
     const [formTitle, setFormTitle] = useState('');
     const dispatch = useAppDispatch();
-    const [itemList, setItemList] = useState<any[]>([
-        {sort : 1, title : "one", id : 0, type : "shortAnswer"},
-        {sort : 2, title : "two", id : 1, type : "longAnswer"},
-        {sort : 3, title : "two", id : 2, type : "multipleChoice"},
-        {sort : 4, title : "two", id : 3, type : "checkBox"},
-        {sort : 5, title : "two", id : 4, type : "dropDown"},
-    ]);
+
     useEffect(() => {
         console.log("formList\n", formList);
     }, [formList]);
 
-    const AddForm = useCallback((event:any) => {
-        event.preventDefault();
-
-        const AddItem: FormItem = {
-            id : (!formList.length) ? 0 : Math.max(...formList.map((item) => item.id)) + 1,
-            title : formTitle,
-            type : "shortAnswer",
-            activated : true
-        };
-        const setFormList = [...formList, AddItem];
-        dispatch(setForm(setFormList));
-        setFormTitle('');
-    }, [dispatch, formTitle, formList]);
 
     // 브라우저 상에 보여지는 데이터 리스트
     const dragList = (record: any, id: number) => (
@@ -64,7 +45,7 @@ const Form = () =>{
     );
     return(
         <FormSection>
-            <MenuBar addBtnFn = {()=>AddForm}/>
+            <MenuBar />
             <TitleSection />
             <style.DragList
                 dataSource={formList}//렌더링할 데이터 레코드 배열

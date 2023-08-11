@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 interface FormItem {
     id: number,
     // order : number,
-    title: string,
+    title?: string,
     detail ?: string,
     type : string,
     subject ?:string,

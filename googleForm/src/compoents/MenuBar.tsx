@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useCallback, useEffect, useState} from "react"
 import Tooltip from "@mui/material/Tooltip";
 import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
@@ -9,12 +9,35 @@ import SmartDisplayOutlinedIcon from '@mui/icons-material/SmartDisplayOutlined';
 import SplitscreenSharpIcon from '@mui/icons-material/SplitscreenSharp';
 import {IconButton} from "@mui/material";
 import {FloatingBar} from "./ComponentStyle";
+import {useAppDispatch, useAppSelector} from "../users/config";
+import {setForm} from "../users/slices/formSlice";
 
-interface MenuInfo {
-    addBtnFn : () => void;
+
+interface FormItem {
+    id: number,
+    // order : number,
+    title?: string,
+    detail ?: string,
+    type : string,
+    subject ?:string,
+    activated: boolean,
 }
+export const MenuBar = () => {
+    const {formList} = useAppSelector(state => state.form);
+    const dispatch = useAppDispatch();
 
-export const MenuBar = (props:MenuInfo) => {
+    const AddForm = useCallback((event:any) => {
+        event.preventDefault();
+
+        const AddItem: FormItem = {
+            id : (!formList.length) ? 0 : Math.max(...formList.map((item) => item.id)) + 1,
+            type : "shortAnswer",
+            activated : true
+        };
+        const setFormList = [...formList, AddItem];
+        dispatch(setForm(setFormList));
+    }, [dispatch, formList]);
+
     return(
         <FloatingBar>
             <Tooltip title={"미리보기"}>
@@ -23,7 +46,7 @@ export const MenuBar = (props:MenuInfo) => {
                 </IconButton>
             </Tooltip>
             <Tooltip title={"질문 추가"}>
-                <IconButton onClick={props.addBtnFn}>
+                <IconButton onClick={AddForm}>
                     <AddCircleOutlineIcon />
                 </IconButton>
             </Tooltip>

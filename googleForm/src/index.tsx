@@ -5,7 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {Provider} from "react-redux";
 // import store from "./store/config";
-import research from "./users/config";
+import research from "./research/config";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

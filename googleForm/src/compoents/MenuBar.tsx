@@ -9,8 +9,9 @@ import SmartDisplayOutlinedIcon from '@mui/icons-material/SmartDisplayOutlined';
 import SplitscreenSharpIcon from '@mui/icons-material/SplitscreenSharp';
 import {IconButton} from "@mui/material";
 import {FloatingBar} from "./ComponentStyle";
-import {useAppDispatch, useAppSelector} from "../users/config";
-import {setForm} from "../users/slices/formSlice";
+import {useAppDispatch, useAppSelector} from "../research/config";
+import {setForm} from "../research/slices/formSlice";
+import {setVisible} from "../research/slices/userSlice";
 
 
 interface FormItem {

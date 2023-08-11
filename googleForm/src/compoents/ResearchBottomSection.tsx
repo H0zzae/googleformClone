@@ -9,8 +9,8 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Check from '@mui/icons-material/Check';
 import {CustomHeightDiv, FlexRightRow} from "./ComponentStyle";
-import {useAppDispatch, useAppSelector} from "../users/config";
-import {setForm} from "../users/slices/formSlice";
+import {useAppDispatch, useAppSelector} from "../research/config";
+import {setForm} from "../research/slices/formSlice";
 
 export interface BottomSectionInfo {
     id : number;

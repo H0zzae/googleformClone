@@ -3,8 +3,8 @@ import {MenuBar, ResearchBox, ShortAnswerType, SubmitSection, TitleSection} from
 import * as style from "../../compoents/ComponentStyle";
 import {FormSection} from "./formStyle";
 import {DragList} from "../../compoents/ComponentStyle";
-import {useAppDispatch, useAppSelector} from "../../users/config";
-import {setForm} from "../../users/slices/formSlice";
+import {useAppDispatch, useAppSelector} from "../../research/config";
+import {setForm} from "../../research/slices/formSlice";
 import {Button} from "@mui/material";
 
 interface FormItem {

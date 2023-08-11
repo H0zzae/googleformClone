@@ -31,4 +31,5 @@ export const userSlice = createSlice({
     }
 });
 
+export const {setVisible} = userSlice.actions;
 export default userSlice;

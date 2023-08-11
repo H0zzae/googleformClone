@@ -1,5 +1,5 @@
 import {combineReducers, configureStore} from "@reduxjs/toolkit";
-import userSlice from "../store/slices/userSlice";
+import userSlice from "./slices/userSlice";
 import {createLogger} from "redux-logger";
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 import formSlice from "./slices/formSlice";
@@ -13,7 +13,7 @@ const rootReducer = combineReducers({
 
 const initialState = {};
 
-export const user = configureStore({
+export const research = configureStore({
     reducer : rootReducer,
     middleware : (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
     devTools: process.env.NODE_ENV !== 'production',
@@ -21,9 +21,9 @@ export const user = configureStore({
     enhancers: (defaultEnhancers) => [...defaultEnhancers]
 })
 
-export type RootState = ReturnType<typeof user.getState>;
-export type AppDispatch = typeof user.dispatch;
+export type RootState = ReturnType<typeof research.getState>;
+export type AppDispatch = typeof research.dispatch;
 
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 export const useAppDispatch = () => useDispatch<AppDispatch>();
-export default user;
+export default research;

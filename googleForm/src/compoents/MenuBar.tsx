@@ -10,7 +10,11 @@ import SplitscreenSharpIcon from '@mui/icons-material/SplitscreenSharp';
 import {IconButton} from "@mui/material";
 import {FloatingBar} from "./ComponentStyle";
 
-export const MenuBar = () => {
+interface MenuInfo {
+    addBtnFn : () => void;
+}
+
+export const MenuBar = (props:MenuInfo) => {
     return(
         <FloatingBar>
             <Tooltip title={"미리보기"}>
@@ -19,7 +23,7 @@ export const MenuBar = () => {
                 </IconButton>
             </Tooltip>
             <Tooltip title={"질문 추가"}>
-                <IconButton>
+                <IconButton onClick={props.addBtnFn}>
                     <AddCircleOutlineIcon />
                 </IconButton>
             </Tooltip>

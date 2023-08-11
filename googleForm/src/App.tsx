@@ -2,6 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import {useAppDispatch} from "./store/config";
+import {useAppDispatch as formAppDispatch } from "./users/config";
 import {UserService} from "./services/userService";
 import Counter from "./screens/Counter";
 import Todo from "./screens/Todo";
@@ -25,7 +26,8 @@ const theme = createTheme({
   }
 });
 function App() {
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
+  const dispatch = formAppDispatch();
   const getUser = async () =>{
     dispatch(UserService.getUser(
         '1'

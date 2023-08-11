@@ -25,6 +25,7 @@ interface FormItem {
 }
 export const MenuBar = () => {
     const {formList} = useAppSelector(state => state.form);
+    const {value} = useAppSelector(state => state.user);
     const dispatch = useAppDispatch();
 
     const AddForm = useCallback((event:any) => {
@@ -35,14 +36,23 @@ export const MenuBar = () => {
             type : "shortAnswer",
             activated : true
         };
-        const setFormList = [...formList, AddItem];
+        const prevForm = formList.map((i) => {
+            if(i.activated){
+                return{...i, activated : false }
+            }else return i
+        });
+        const setFormList = [...prevForm, AddItem];
         dispatch(setForm(setFormList));
     }, [dispatch, formList]);
+
+    const changeValue = useCallback((param:string) => {
+        dispatch(setVisible(param))
+    },[dispatch, value]);
 
     return(
         <FloatingBar>
             <Tooltip title={"미리보기"}>
-                <IconButton>
+                <IconButton onClick={()=>changeValue("preview")}>
                     <RemoveRedEyeOutlinedIcon />
                 </IconButton>
             </Tooltip>

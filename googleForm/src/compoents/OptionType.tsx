@@ -5,6 +5,7 @@ import {MultipleChoiceOption} from "./MultipleChoiceOption";
 interface optionTypeinfo {
     title?: string;
     type ?:string;
+    // disable : boolean;
 }
 export const OptionType = (oinfo:optionTypeinfo) => {
 

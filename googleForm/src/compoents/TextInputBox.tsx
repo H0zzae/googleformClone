@@ -6,6 +6,7 @@ interface TextItem {
     title?: string,
     checked?: boolean,
     activated?: boolean,
+    onChange : () => void;
 }
 
 export const TextInputBox = (info:TextItem)=>{
@@ -18,6 +19,7 @@ export const TextInputBox = (info:TextItem)=>{
                 value={info.title}
                 variant="filled"
                 sx={{width : 446, padding : 0}}
+                onChange={info.onChange}
             />
         </FlexLeftRow>
     );

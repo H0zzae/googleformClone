@@ -4,6 +4,7 @@ import {ShortAnswerInputBox} from "./ShortAnswerInputBox";
 interface shortAnswerInfo {
     text ?: string;
     type ?: string;
+    disable : boolean;
 }
 
 export const ShortAnswerType = (sainfo:shortAnswerInfo) => {
@@ -11,7 +12,7 @@ export const ShortAnswerType = (sainfo:shortAnswerInfo) => {
     <>
         <FlexTopColumn>
             <FlexLeftRow>
-                <ShortAnswerInputBox  text={sainfo.text}/>
+                <ShortAnswerInputBox  text={sainfo.text} disable={sainfo.disable}/>
             </FlexLeftRow>
         </FlexTopColumn>
     </>

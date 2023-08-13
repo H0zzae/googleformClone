@@ -19,6 +19,7 @@ interface FormItem {
 const Form = () =>{
     const {formList} = useAppSelector(state => state.form);
     const [formTitle, setFormTitle] = useState('');
+    const {value} = useAppSelector(state => state.user);
     const dispatch = useAppDispatch();
 
     useEffect(() => {
@@ -28,8 +29,8 @@ const Form = () =>{
 
     // 브라우저 상에 보여지는 데이터 리스트
     const dragList = (record: any, id: number) => (
-        <ResearchBox title={record.title} id={id} type={record.type}/>
-        // 여기서 record는 dataSource로 itemList이다.
+        <ResearchBox id={id} type={record.type} disable={value!=='write'}/>
+        // 여기서 record는 dataSource
         // <div key={index}>
         //     <TextInputBox />
         //     <div>{record.sort}</div>

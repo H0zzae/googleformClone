@@ -26,7 +26,7 @@ export const ResearchBox = (researchBoxInfo:ResearchBoxInfo)=> {
 
     const formItem = formList.map((i) => {if (i.id === researchBoxInfo.id) return i})[0];
 
-    const [itemTitle, setTitle] = useState<string>(researchBoxInfo.title || '');
+    const [itemTitle, setTitle] = useState<string>(researchBoxInfo.title || '이름');
 
     const onChangeTitle = useCallback((event:ChangeEvent<HTMLInputElement>) => {
         setTitle(event.target.value);
@@ -46,7 +46,6 @@ export const ResearchBox = (researchBoxInfo:ResearchBoxInfo)=> {
                     <TextField
                         hiddenLabel
                         id="filled-hidden-label-normal"
-                        defaultValue={"이름"}
                         value={itemTitle}
                         variant="filled"
                         sx={{width : 446, padding : 0}}

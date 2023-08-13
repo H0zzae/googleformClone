@@ -47,7 +47,7 @@ const Form = () =>{
     return(
         <FormSection>
             <MenuBar />
-            <TitleSection />
+            <TitleSection edit={value!=='write'}/>
             <style.DragList
                 dataSource={formList}//렌더링할 데이터 레코드 배열
                 rowKey='id'//렌더링할 행 키

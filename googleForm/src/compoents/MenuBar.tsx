@@ -7,6 +7,7 @@ import TextFieldsOutlinedIcon from '@mui/icons-material/TextFieldsOutlined';
 import InsertPhotoOutlinedIcon from '@mui/icons-material/InsertPhotoOutlined';
 import SmartDisplayOutlinedIcon from '@mui/icons-material/SmartDisplayOutlined';
 import SplitscreenSharpIcon from '@mui/icons-material/SplitscreenSharp';
+import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutlined';
 import {IconButton} from "@mui/material";
 import {FloatingBar} from "./ComponentStyle";
 import {useAppDispatch, useAppSelector} from "../research/config";
@@ -51,10 +52,16 @@ export const MenuBar = () => {
 
     return(
         <FloatingBar>
-            {value!=="preview" &&
+            {value!=="preview" ?
                 <Tooltip title={"미리보기"}>
                     <IconButton onClick={()=>changeValue("preview")}>
                         <RemoveRedEyeOutlinedIcon />
+                    </IconButton>
+                </Tooltip>
+            :
+                <Tooltip title={"설문 수정"}>
+                    <IconButton onClick={()=>changeValue("write")}>
+                        <ModeEditOutlineOutlinedIcon />
                     </IconButton>
                 </Tooltip>
             }

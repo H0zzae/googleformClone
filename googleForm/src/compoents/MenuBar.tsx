@@ -51,11 +51,13 @@ export const MenuBar = () => {
 
     return(
         <FloatingBar>
-            <Tooltip title={"미리보기"}>
-                <IconButton onClick={()=>changeValue("preview")}>
-                    <RemoveRedEyeOutlinedIcon />
-                </IconButton>
-            </Tooltip>
+            {value!=="preview" &&
+                <Tooltip title={"미리보기"}>
+                    <IconButton onClick={()=>changeValue("preview")}>
+                        <RemoveRedEyeOutlinedIcon />
+                    </IconButton>
+                </Tooltip>
+            }
             <Tooltip title={"질문 추가"}>
                 <IconButton onClick={AddForm}>
                     <AddCircleOutlineIcon />

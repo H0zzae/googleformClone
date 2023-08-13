@@ -15,7 +15,17 @@ export const DragList = styled(ReactDragList)`
     
 `;
 
+export const PurpleLineDiv = styled.div`
+  height : 10px;
+  width : 100%;
+  background : rgb(103, 58, 183);
+  position: absolute;
+  left: 0;
+  top: 0;
+  border-radius: 8px 8px 0 0;
+`;
 export const ResearchDiv = styled.div`
+  position: relative;
   border: 1px solid #dadce0;
   background-color : #fff;
   margin-top: 12px;

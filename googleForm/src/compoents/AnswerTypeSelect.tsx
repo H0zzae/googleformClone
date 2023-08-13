@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react"
+import React, {useCallback, useEffect, useState} from "react"
 import { MenuItem, Select, SelectChangeEvent, Typography} from "@mui/material";
 import ShortTextIcon from '@mui/icons-material/ShortText';
 import SubjectIcon from '@mui/icons-material/Subject';
@@ -7,6 +7,8 @@ import CheckBoxOutlinedIcon from '@mui/icons-material/CheckBoxOutlined';
 import ArrowDropDownCircleOutlinedIcon from '@mui/icons-material/ArrowDropDownCircleOutlined';
 import {FlexLeftRow} from "./ComponentStyle";
 import Divider from "@mui/material/Divider";
+import {useAppDispatch, useAppSelector} from "../research/config";
+import {setForm} from "../research/slices/formSlice";
 
 const AnswerType = [{id: 0, name : '단답형', description : 'shortAnswer'},
     {id: 1, name : '장문형', description : 'longAnswer'},
@@ -17,21 +19,30 @@ const AnswerType = [{id: 0, name : '단답형', description : 'shortAnswer'},
     ]
 
 interface selectedType{
+    id : number;
     type ?:string
 }
 
 export const AnswerTypeSelect =(info : selectedType) => {
-    const [type, setType] = useState<string>(info.type || 'shortAnswer');
+    const {formList} = useAppSelector(state => state.form);
+    const dispatch = useAppDispatch();
 
-    const handleChange = (event: SelectChangeEvent) => {
-        setType(event.target.value);
-    };
+
+    const handleChange = useCallback((event: SelectChangeEvent) => {
+        const modForm = formList.map((i) => {
+            if (i.id === info.id){
+                return {...i, type: event.target.value}
+            }
+            else return i
+        })
+        dispatch(setForm(modForm))
+    },[dispatch, formList]);
 
     return(
         <Select
             labelId="demo-simple-select-helper-label"
             id="demo-simple-select-helper"
-            value={type}
+            value={info.type}
             onChange={handleChange}
             sx={{width : 208}}
         >

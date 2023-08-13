@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import * as style from "./ComponentStyle";
 import {ResearchBottomSection} from "./ResearchBottomSection";
 import {OptionType} from "./OptionType";
@@ -17,13 +17,12 @@ export interface ResearchBoxInfo {
     type ?: string
 }
 export const ResearchBox = (researchBoxInfo:ResearchBoxInfo)=> {
-
     return (
         <style.ResearchDiv>
             <FlexLeftRow justifyContent={'space-between'} gap={8}>
                 <TextInputBox title={researchBoxInfo.title}/>
                 <ImageOutlinedIcon sx={{fontSize: 24}}/>
-                <AnswerTypeSelect type={researchBoxInfo.type}/>
+                <AnswerTypeSelect id={researchBoxInfo.id} type={researchBoxInfo.type}/>
             </FlexLeftRow>
             {researchBoxInfo.type ==="shortAnswer"?
                 <ShortAnswerType />

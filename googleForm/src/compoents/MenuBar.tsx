@@ -49,8 +49,12 @@ export const MenuBar = () => {
     }, [dispatch, formList]);
 
     const changeValue = useCallback((param:string) => {
-        dispatch(setVisible(param))
-    },[dispatch, value]);
+        const modForm = formList.map((i) => {
+            return {...i, activated: false}
+        });
+        dispatch(setForm(modForm));
+        dispatch(setVisible(param));
+    },[dispatch, value, formList]);
 
     return(
         <FloatingBar>

@@ -1,9 +1,9 @@
-import React, {ChangeEvent, useCallback, useState} from "react";
+import React, {ChangeEvent, FocusEventHandler, useCallback, useState} from "react";
 import {ResearchBottomSection} from "./ResearchBottomSection";
 import {OptionType} from "./OptionType";
 import {ShortAnswerType} from "./ShortAnswerType";
 import {LongAnswerType} from "./LongAnswerType";
-import {FlexLeftRow, RedText,ResearchDiv} from "./ComponentStyle";
+import {FlexLeftRow, RedText,ResearchDiv, BlueBox} from "./ComponentStyle";
 import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
 import {AnswerTypeSelect} from "./AnswerTypeSelect";
 import {CheckBoxType} from "./CheckBoxType";
@@ -18,7 +18,10 @@ export interface ResearchBoxInfo {
     type ?: string;
     disable : boolean;
     checked : boolean;
+    activated : boolean;
 }
+
+
 export const ResearchBox = (researchBoxInfo:ResearchBoxInfo)=> {
     const {formList} = useAppSelector(state => state.form);
     const {value} = useAppSelector(state => state.user);
@@ -37,11 +40,22 @@ export const ResearchBox = (researchBoxInfo:ResearchBoxInfo)=> {
         })
         dispatch(setForm(modForm));
     },[dispatch, formList]);
-
+    const handleFocusEvent = useCallback((e:any) => {
+        const targetForm = formList.findIndex((i) => i.id === researchBoxInfo.id);
+        if (!formList[targetForm].activated && !researchBoxInfo.disable) {
+            const modForm = formList.map((i) => {
+                if (i.id === researchBoxInfo.id) {
+                    return {...i, activated: true}
+                } else return {...i, activated: false}
+            })
+            modForm !== formList && dispatch(setForm(modForm));
+        }
+    },[dispatch, formList])
 
     return (
-        <ResearchDiv>
-            {!researchBoxInfo.disable?
+        <ResearchDiv onClick={handleFocusEvent} activated={researchBoxInfo.activated}>
+            {!researchBoxInfo.disable && researchBoxInfo.activated && <BlueBox/>}
+            {!researchBoxInfo.disable && researchBoxInfo.activated?
                 <FlexLeftRow justifyContent={'space-between'} gap={8}>
                     <FlexLeftRow justifyContent={'space-between'}>
                         <TextField
@@ -76,7 +90,10 @@ export const ResearchBox = (researchBoxInfo:ResearchBoxInfo)=> {
             : <DropDownType />
             // : <DropDownType  disable={researchBoxInfo.disable}/>
             }
+
+            {!researchBoxInfo.disable && researchBoxInfo.activated &&
             <ResearchBottomSection id={researchBoxInfo.id} checked={researchBoxInfo.checked}/>
+            }
         </ResearchDiv>
     )
 }

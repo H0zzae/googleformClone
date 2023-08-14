@@ -14,6 +14,7 @@ import {setForm} from "../research/slices/formSlice";
 
 export interface BottomSectionInfo {
     id : number;
+    checked : boolean;
 }
 const options = ['개제', '설명', '답변을 기준으로 섹션 이동'];
 const shuffles = ['옵션 순서 무작위로 섞기']
@@ -38,6 +39,16 @@ export const ResearchBottomSection = (info:BottomSectionInfo) =>{
         dispatch(setForm(setFormList));
     },[dispatch, formList]);
 
+    const handleSwitch = useCallback((event : React.ChangeEvent<HTMLInputElement>) => {
+        console.log(info.id,  event.target.checked);
+        const modForm = formList.map((i) => {
+            if (i.id === info.id){
+                return {...i, necessary : event.target.checked}
+            }else return i
+        })
+        dispatch(setForm(modForm));
+    },[dispatch, formList]);
+
     return (
         <CustomHeightDiv height={65} paddingTop={24}>
             <Divider variant="middle" />
@@ -57,7 +68,7 @@ export const ResearchBottomSection = (info:BottomSectionInfo) =>{
                     <FlexRightRow>
                         <FormControlLabel
                             value="necessary"
-                            control={<Switch color="primary" />}
+                            control={<Switch color="primary" onChange={handleSwitch}/>}
                             label="필수"
                             labelPlacement="start"
                         />

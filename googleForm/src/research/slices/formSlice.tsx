@@ -7,7 +7,8 @@ interface FormItem {
     detail ?: string,
     type : string,
     subject ?:string,
-    activated: boolean,
+    activated : boolean,
+    necessary : boolean,
 }
 
 export interface CommonState {

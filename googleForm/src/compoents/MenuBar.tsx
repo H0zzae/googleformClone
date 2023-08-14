@@ -23,6 +23,7 @@ interface FormItem {
     type : string,
     subject ?:string,
     activated: boolean,
+    necessary : boolean,
 }
 export const MenuBar = () => {
     const {formList} = useAppSelector(state => state.form);
@@ -35,11 +36,12 @@ export const MenuBar = () => {
         const AddItem: FormItem = {
             id : (!formList.length) ? 0 : Math.max(...formList.map((item) => item.id)) + 1,
             type : "shortAnswer",
-            activated : true
+            activated : true,
+            necessary : false,
         };
         const prevForm = formList.map((i) => {
             if(i.activated){
-                return{...i, activated : false }
+                return{...i, activated : false, necessary : false }
             }else return i
         });
         const setFormList = [...prevForm, AddItem];

@@ -1,10 +1,9 @@
 import React, {ChangeEvent, useCallback, useState} from "react";
-import * as style from "./ComponentStyle";
 import {ResearchBottomSection} from "./ResearchBottomSection";
 import {OptionType} from "./OptionType";
 import {ShortAnswerType} from "./ShortAnswerType";
 import {LongAnswerType} from "./LongAnswerType";
-import {FlexLeftRow} from "./ComponentStyle";
+import {FlexLeftRow, RedText,ResearchDiv} from "./ComponentStyle";
 import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
 import {AnswerTypeSelect} from "./AnswerTypeSelect";
 import {CheckBoxType} from "./CheckBoxType";
@@ -18,6 +17,7 @@ export interface ResearchBoxInfo {
     title ?: string;
     type ?: string;
     disable : boolean;
+    checked : boolean;
 }
 export const ResearchBox = (researchBoxInfo:ResearchBoxInfo)=> {
     const {formList} = useAppSelector(state => state.form);
@@ -40,24 +40,28 @@ export const ResearchBox = (researchBoxInfo:ResearchBoxInfo)=> {
 
 
     return (
-        <style.ResearchDiv>
+        <ResearchDiv>
             {!researchBoxInfo.disable?
                 <FlexLeftRow justifyContent={'space-between'} gap={8}>
                     <FlexLeftRow justifyContent={'space-between'}>
-                            <TextField
-                                hiddenLabel
-                                id="filled-hidden-label-normal"
-                                value={itemTitle}
-                                variant="filled"
-                                sx={{width : 446, padding : 0}}
-                                onChange={onChangeTitle}
-                            />
+                        <TextField
+                            hiddenLabel
+                            id="filled-hidden-label-normal"
+                            value={itemTitle}
+                            variant="filled"
+                            sx={{width : 446, padding : 0}}
+                            onChange={onChangeTitle}
+                        />
 
                     </FlexLeftRow>
                     <ImageOutlinedIcon sx={{fontSize: 24}} onClick ={() => console.log(formItem)}/>
                     <AnswerTypeSelect id={researchBoxInfo.id} type={researchBoxInfo.type}/>
                 </FlexLeftRow>
-            :<Typography variant="body1" sx={{fontSize: '16px', fontWeight : 400, marginBottom: '16px'}}>{itemTitle}</Typography>
+            :
+                <>
+                    <Typography variant="body1" sx={{fontSize: '16px', fontWeight : 400, marginBottom: '16px', whiteSpace : 'nowrap', display : "inline"}}>{itemTitle}</Typography>
+                    {researchBoxInfo.checked && <RedText sx={{display : "inline"}}> *</RedText>}
+                </>
             }
             {researchBoxInfo.type ==="shortAnswer"?
                 <ShortAnswerType disable={researchBoxInfo.disable}/>
@@ -72,7 +76,7 @@ export const ResearchBox = (researchBoxInfo:ResearchBoxInfo)=> {
             : <DropDownType />
             // : <DropDownType  disable={researchBoxInfo.disable}/>
             }
-            <ResearchBottomSection id={researchBoxInfo.id} />
-        </style.ResearchDiv>
+            <ResearchBottomSection id={researchBoxInfo.id} checked={researchBoxInfo.checked}/>
+        </ResearchDiv>
     )
 }

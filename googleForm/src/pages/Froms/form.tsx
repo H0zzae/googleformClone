@@ -29,7 +29,7 @@ const Form = () =>{
 
     // 브라우저 상에 보여지는 데이터 리스트
     const dragList = (record: any, id: number) => (
-        <ResearchBox id={id} type={record.type} disable={value!=='write'}/>
+        <ResearchBox id={id} type={record.type} disable={value!=='write'} checked={record.necessary}/>
         // 여기서 record는 dataSource
         // <div key={index}>
         //     <TextInputBox />

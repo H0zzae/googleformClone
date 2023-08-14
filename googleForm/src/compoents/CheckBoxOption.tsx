@@ -32,7 +32,7 @@ export const CheckBoxOption = () => {
             <FlexLeftRow  justifyContent={'space-between'}>
                 <FlexLeftRow>
                     <Checkbox {...label} checked={checked[0]} disabled />
-                    <ShortAnswerInputBox  text={defaultText + (optionList.length + 1).toString()} activate={true} fullWidth={true}/>
+                    <Input defaultValue={defaultText + (optionList.length + 1).toString()} sx={{margin: '9px 0', width:  600}}/>
                     {/*hover시 표시됨*/}
                 </FlexLeftRow>
                 <Tooltip title="이미지 추가">

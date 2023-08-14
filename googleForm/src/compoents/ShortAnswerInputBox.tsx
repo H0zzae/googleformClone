@@ -10,10 +10,6 @@ interface ShortAnswerInfo {
 const ariaLabel = {'arial-label' : 'description'};
 export const ShortAnswerInputBox = (sinfo:ShortAnswerInfo) =>{
     return (
-        <>{
-          sinfo.activate ?
-              <Input defaultValue="단답형 텍스트" value={sinfo.text} inputProps={ariaLabel} sx={{margin: '9px 0',width: sinfo.fullWidth ? 600 : 360}}/>
-          :<Input disabled defaultValue="단답형 텍스트" value={sinfo.text} inputProps={ariaLabel} sx={{margin: '9px 0', width: sinfo.fullWidth ? 600 : 360}}/>
-        }</>
+        <Input disabled={!sinfo.disable} placeholder="단답형 텍스트" value={sinfo.text} inputProps={ariaLabel} sx={{margin: '9px 0', width: sinfo.fullWidth ? 600 : 360}}/>
     )
 }

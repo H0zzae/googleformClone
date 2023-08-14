@@ -22,7 +22,7 @@ export const DropDownOption = () => {
             <FlexLeftRow justifyContent={'space-between'}>
                 <FlexLeftRow>
                     <Typography sx={{padding: '9px 9px 9px 0'}}>{count}</Typography>
-                    <ShortAnswerInputBox  text={defaultText + (optionList.length + 1).toString()} activate={true} fullWidth={true}/>
+                    <Input defaultValue={defaultText + (optionList.length + 1).toString()} sx={{margin: '9px 0', width:  600}}/>
                 </FlexLeftRow>
                 {/*해당 질문 클릭시에만 표시됨*/}
                 <Tooltip title="삭제">

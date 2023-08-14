@@ -26,7 +26,7 @@ export const TitleSection = (props:TitleInfo) => {
             <ResearchDiv>
                 <PurpleLineDiv />
                 <Input fullWidth placeholder={"설문지 제목"} value={title} onChange={(event:ChangeEvent<HTMLInputElement>) => setTitle(event.target.value)} sx={{fontSize : '24px !important'}} />
-                <Input defaultValue={"설문지 설명"} multiline value = {description} onChange={(event:ChangeEvent<HTMLInputElement>) => setDescription(event.target.value)} sx={{margin: '9px 0', width:'100%'}} />
+                <Input placeholder={"설문지 설명"} multiline value = {description} onChange={(event:ChangeEvent<HTMLInputElement>) => setDescription(event.target.value)} sx={{margin: '9px 0', width:'100%'}} />
             </ResearchDiv>
         }
     </>

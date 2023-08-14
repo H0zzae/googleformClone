@@ -52,49 +52,50 @@ export const MenuBar = () => {
 
     return(
         <FloatingBar>
-            {value!=="preview" ?
-                <Tooltip title={"미리보기"}>
-                    <IconButton onClick={()=>changeValue("preview")}>
-                        <RemoveRedEyeOutlinedIcon />
-                    </IconButton>
-                </Tooltip>
-            :
+            {value==="preview" ?
                 <Tooltip title={"설문 수정"}>
                     <IconButton onClick={()=>changeValue("write")}>
                         <ModeEditOutlineOutlinedIcon />
                     </IconButton>
                 </Tooltip>
-            }
-            <Tooltip title={"질문 추가"}>
-                <IconButton onClick={AddForm}>
-                    <AddCircleOutlineIcon />
-                </IconButton>
-            </Tooltip>
-            <Tooltip title={"질문 가져오기"}>
-                <IconButton>
-                    <NoteAddOutlinedIcon />
-                </IconButton>
-            </Tooltip>
-            <Tooltip title={"제목 및 설명 추가"}>
-                <IconButton>
-                    <TextFieldsOutlinedIcon />
-                </IconButton>
-            </Tooltip>
-            <Tooltip title={"이미지 추가"}>
-                <IconButton>
-                    <InsertPhotoOutlinedIcon />
-                </IconButton>
-            </Tooltip>
-            <Tooltip title={"동영상 추가"}>
-                <IconButton>
-                    <SmartDisplayOutlinedIcon />
-                </IconButton>
-            </Tooltip>
-            <Tooltip title={"섹션 추가"}>
-                <IconButton>
-                    <SplitscreenSharpIcon />
-                </IconButton>
-            </Tooltip>
+            :
+            <>
+                <Tooltip title={"미리보기"}>
+                    <IconButton onClick={()=>changeValue("preview")}>
+                        <RemoveRedEyeOutlinedIcon />
+                    </IconButton>
+                </Tooltip>
+                <Tooltip title={"질문 추가"}>
+                    <IconButton onClick={AddForm}>
+                        <AddCircleOutlineIcon />
+                    </IconButton>
+                </Tooltip>
+                <Tooltip title={"질문 가져오기"}>
+                    <IconButton>
+                        <NoteAddOutlinedIcon />
+                    </IconButton>
+                </Tooltip>
+                <Tooltip title={"제목 및 설명 추가"}>
+                    <IconButton>
+                        <TextFieldsOutlinedIcon />
+                    </IconButton>
+                </Tooltip>
+                <Tooltip title={"이미지 추가"}>
+                    <IconButton>
+                        <InsertPhotoOutlinedIcon />
+                    </IconButton>
+                </Tooltip>
+                <Tooltip title={"동영상 추가"}>
+                    <IconButton>
+                        <SmartDisplayOutlinedIcon />
+                    </IconButton>
+                </Tooltip>
+                <Tooltip title={"섹션 추가"}>
+                    <IconButton>
+                        <SplitscreenSharpIcon />
+                    </IconButton>
+                </Tooltip>
+            </>}
         </FloatingBar>
     )
 }

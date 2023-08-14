@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import ReactDragList from "react-drag-list";
-import {Select} from "@mui/material";
+import {Select, Typography} from "@mui/material";
 interface Attribute {
     height ?:number;
     width ?:number;
@@ -105,3 +105,9 @@ export const FloatingBar = styled.div`
   gap:2px;
   padding : 8px 0;
 `;
+
+export const RedText = styled(Typography)`
+  color : rgb(217,48,37);
+  font-weight: 400;
+  letter-spacing: .2px;
+`

@@ -1,7 +1,8 @@
 import React, {ChangeEvent, useState} from "react"
-import {PurpleLineDiv, ResearchDiv} from "./ComponentStyle";
+import {PurpleLineDiv, ResearchDiv, RedText} from "./ComponentStyle";
 import {Input, TextField, Typography} from "@mui/material";
 import {LongAnswerInputBox} from "./LongAnswerInputBox";
+import Divider from "@mui/material/Divider";
 
 interface TitleInfo {
     edit : boolean;
@@ -18,6 +19,8 @@ export const TitleSection = (props:TitleInfo) => {
                 <PurpleLineDiv />
                 <Typography variant="h1" sx={{fontSize : '24px !important', fontWeight : 'bold'}} gutterBottom>{title}</Typography>
                 <Typography variant="body1" gutterBottom>{description}</Typography>
+                <Divider/>
+                <RedText>* 표시는 필수 질문임</RedText>
             </ResearchDiv>
         :
             <ResearchDiv>

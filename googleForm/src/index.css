@@ -34,8 +34,8 @@ code {
   padding-left: 0;
 }
 .MuiFormGroup-root .MuiRadio-root {
-  padding-left: 0;
+  margin-left: -12px;
 }
 .MuiCheckbox-root.MuiCheckbox-root {
-  padding-left: 0;
+  margin-left: -12px;
 }

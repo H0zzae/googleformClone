@@ -1,4 +1,4 @@
-import React, {ChangeEvent, FocusEvent, ChangeEventHandler, useCallback, useEffect, useState} from "react"
+import React, {ChangeEvent, FocusEvent, ChangeEventHandler, KeyboardEvent, useCallback, useEffect, useState} from "react"
 import {FlexLeftRow} from "./ComponentStyle";
 import {
     Button,
@@ -17,6 +17,7 @@ import ClearIcon from '@mui/icons-material/Clear';
 import Tooltip from "@mui/material/Tooltip";
 import {useAppDispatch, useAppSelector} from "../research/config";
 import {setForm} from "../research/slices/formSlice";
+import form from "../pages/Froms/form";
 
 interface optionInfo {
     id : number;
@@ -34,7 +35,7 @@ export const MultipleChoiceOption = (info : optionInfo) => {
 
     useEffect(() => {
         setOptionList(formList[info.id].options || []);
-    }, [formList]);
+    }, [formList, dispatch]);
     const saveModOption = (changed:any[]) => {
         const modForm = formList.map((i) => {
             if (i.id ===info.id) {
@@ -42,6 +43,7 @@ export const MultipleChoiceOption = (info : optionInfo) => {
             }else return i
         })
         dispatch(setForm(modForm));
+        setOptionList(changed);
     }
     const handleTextChange = useCallback((event : ChangeEvent<HTMLInputElement>, id:number) => {
         const targetForm = formList[info.id];
@@ -69,14 +71,34 @@ export const MultipleChoiceOption = (info : optionInfo) => {
     };
 
     const addOptionValue = useCallback((event : FocusEvent<HTMLInputElement>) => {
-        const targetForm = formList[info.id];
-        const newID = targetForm?.options?.length;
-        const modOption = targetForm?.options?.concat([{id: newID, value: event.target.value, selected: false}]);
-        console.log(modOption);
-        saveModOption(modOption || []);
-        setNewInputText('');
+        if (newInputText !=='') {
+            const targetForm = formList[info.id];
+            const newID = targetForm?.options?.length;
+            const modOption = targetForm?.options?.concat([{id: newID, value: event.target.value, selected: false}]);
+            console.log(modOption);
+            saveModOption(modOption || []);
+            setNewInputText('');
+        }
     },[dispatch, formList])
 
+    const addOptionValueWithKeyBoard = useCallback((event:KeyboardEvent<HTMLInputElement>) => {
+        if (event.key ==='Enter') {
+            const NewID = optionList.length;
+            const modOption = optionList.concat([{id : NewID, value : event.currentTarget.value, selected : false}]);
+            saveModOption(modOption);
+            setNewInputText('')
+        }
+    },[dispatch, formList])
+    const removeOption = useCallback((id:number) => {
+        const copyForm = [...optionList];
+        console.log("copyForm", copyForm);
+        const removeIndx = copyForm?.findIndex(item => item.id ===id);
+        if (removeIndx!==undefined) {
+            copyForm?.splice(removeIndx, 1);
+            console.log(id, removeIndx, copyForm)
+            saveModOption(copyForm || []);
+        }
+    },[dispatch, formList])
     const controlProps = (item : string) => ({
         checked : checkedValue ===item,
         onChange : handleChange,
@@ -108,11 +130,13 @@ export const MultipleChoiceOption = (info : optionInfo) => {
                             <ImageOutlinedIcon sx={{fontSize: 24}} />
                         </Tooltip>
                         {/*해당 질문 클릭시에만 표시됨*/}
-                        <Tooltip title="삭제">
-                            <IconButton arai-label="clear">
-                                <ClearIcon />
-                            </IconButton>
-                        </Tooltip>
+                        {optionList.length>1 &&
+                            <Tooltip title="삭제">
+                                <IconButton arai-label="clear" onClick={() => removeOption(item.id)}>
+                                    <ClearIcon />
+                                </IconButton>
+                            </Tooltip>
+                        }
                     </FlexLeftRow>
                 ))}
                 {/*해당 질문 클릭시에만 표시됨*/}
@@ -122,7 +146,11 @@ export const MultipleChoiceOption = (info : optionInfo) => {
                         <TextField placeholder={"옵션 추가"} sx={{width: 52 }}
                                    variant="standard"
                                    value={newInputText}
+                                   onChange={(event : ChangeEvent<HTMLInputElement>) => setNewInputText(event.target.value)}
                                    onBlur ={addOptionValue}
+                                   InputProps={{
+                                       onKeyDown:(event:KeyboardEvent<HTMLInputElement>) => {addOptionValueWithKeyBoard(event)}
+                                   }}
                         />
                         <Typography variant={"body1"}> 또는 </Typography>
                         <Button variant={"text"} size={"small"} sx={{color: "#1976d2"}} onClick={addETC}>'기타' 추가</Button>

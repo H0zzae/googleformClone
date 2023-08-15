@@ -1,9 +1,8 @@
-import React, {ChangeEvent, FocusEvent, ChangeEventHandler, KeyboardEvent, useCallback, useEffect, useState} from "react"
+import React, {ChangeEvent, FocusEvent, KeyboardEvent, useCallback, useEffect, useState} from "react"
 import {FlexLeftRow} from "./ComponentStyle";
 import {
     Button,
     FormControl,
-    FormControlLabel,
     IconButton,
     Input,
     Radio,
@@ -11,13 +10,11 @@ import {
     TextField,
     Typography
 } from "@mui/material";
-import {ShortAnswerInputBox} from "./ShortAnswerInputBox";
 import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
 import ClearIcon from '@mui/icons-material/Clear';
 import Tooltip from "@mui/material/Tooltip";
 import {useAppDispatch, useAppSelector} from "../research/config";
 import {setForm} from "../research/slices/formSlice";
-import form from "../pages/Froms/form";
 
 interface optionInfo {
     id : number;
@@ -69,7 +66,7 @@ export const MultipleChoiceOption = (info : optionInfo) => {
 
     const addETC = useCallback(() => {
         const targetForm = formList[info.id];
-        const newID = targetForm?.options?.length; //맨 마지막에 위치하게끔..수정필요
+        const newID = (!optionList.length) ? 0 : Math.max(...optionList.map((item) => item.id)) + 1; //맨 마지막에 위치하게끔..수정필요
         const modOption = targetForm?.options?.concat([{id: newID, value: '기타', selected : false}]);
         // console.log(modOption);
     },[dispatch, formList]);
@@ -86,7 +83,7 @@ export const MultipleChoiceOption = (info : optionInfo) => {
     const addOptionValue = useCallback((event : FocusEvent<HTMLInputElement>) => {
         if (newInputText !=='') {
             const targetForm = formList[info.id];
-            const newID = targetForm?.options?.length;
+            const newID = (!optionList.length) ? 0 : Math.max(...optionList.map((item) => item.id)) + 1;
             const modOption = targetForm?.options?.concat([{id: newID, value: event.target.value, selected: false}]);
             saveModOption(modOption || []);
             setNewInputText('');
@@ -95,13 +92,14 @@ export const MultipleChoiceOption = (info : optionInfo) => {
 
     const addOptionValueWithKeyBoard = useCallback((event:KeyboardEvent<HTMLInputElement>) => {
         if (event.key ==='Enter') {
-            const NewID = optionList.length;
-            const textValue = event.currentTarget.value ==='' ? defaultText + (NewID+1) : event.currentTarget.value;
+            const NewID = (!optionList.length) ? 0 : Math.max(...optionList.map((item) => item.id)) + 1;
+            const textValue = event.currentTarget.value ==='' ? defaultText + (optionList.length + 1) : event.currentTarget.value;
             const modOption = optionList.concat([{id : NewID, value : textValue, selected : false}]);
             saveModOption(modOption);
             setNewInputText('')
         }
     },[dispatch, formList])
+
     const removeOption = useCallback((id:number) => {
         const copyForm = [...optionList];
         const removeIndx = copyForm?.findIndex(item => item.id ===id);
@@ -110,6 +108,7 @@ export const MultipleChoiceOption = (info : optionInfo) => {
             saveModOption(copyForm || []);
         }
     },[dispatch, formList])
+
     const controlProps = (item : any) => ({
         id : item?.id,
         checked : item?.selected,

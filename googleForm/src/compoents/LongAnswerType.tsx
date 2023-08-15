@@ -5,6 +5,7 @@ import {LongAnswerInputBox} from "./LongAnswerInputBox";
 interface longAnswerInfo {
     text ?: string;
     type ?: string;
+    disable : boolean;
 }
 
 export const LongAnswerType = (lainfo : longAnswerInfo) => {
@@ -12,7 +13,7 @@ export const LongAnswerType = (lainfo : longAnswerInfo) => {
         <>
             <FlexTopColumn>
                 <FlexLeftRow>
-                    <LongAnswerInputBox  text={lainfo.text}/>
+                    <LongAnswerInputBox  text={lainfo.text} disable={lainfo.disable}/>
                 </FlexLeftRow>
             </FlexTopColumn>
         </>

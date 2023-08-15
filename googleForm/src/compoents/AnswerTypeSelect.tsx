@@ -31,6 +31,9 @@ export const AnswerTypeSelect =(info : selectedType) => {
     const handleChange = useCallback((event: SelectChangeEvent) => {
         const modForm = formList.map((i) => {
             if (i.id === info.id){
+                if (!event.target.value.includes('Answer')){
+                    return { ...i, type : event.target.value, options : [{id : 0, value:'옵션 1', selected : false}]}
+                }
                 return {...i, type: event.target.value}
             }
             else return i

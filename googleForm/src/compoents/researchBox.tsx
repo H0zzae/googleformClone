@@ -6,8 +6,6 @@ import {LongAnswerType} from "./LongAnswerType";
 import {FlexLeftRow, RedText,ResearchDiv, BlueBox} from "./ComponentStyle";
 import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
 import {AnswerTypeSelect} from "./AnswerTypeSelect";
-import {CheckBoxType} from "./CheckBoxType";
-import {DropDownType} from "./DropDownType";
 import {useAppDispatch, useAppSelector} from "../research/config";
 import {setForm} from "../research/slices/formSlice";
 import {TextField, Typography} from "@mui/material";
@@ -81,14 +79,8 @@ export const ResearchBox = (researchBoxInfo:ResearchBoxInfo)=> {
                 <ShortAnswerType disable={researchBoxInfo.disable}/>
             :researchBoxInfo.type ==='longAnswer' ?
                 <LongAnswerType  disable={researchBoxInfo.disable}/>
-            :researchBoxInfo.type ==='multipleChoice'?
-                <OptionType />
-                // <OptionType  disable={researchBoxInfo.disable}/>
-            :researchBoxInfo.type === 'checkBox' ?
-                <CheckBoxType />
-                // <CheckBoxType  disable={researchBoxInfo.disable}/>
-            : <DropDownType />
-            // : <DropDownType  disable={researchBoxInfo.disable}/>
+            :
+                <OptionType type={researchBoxInfo.type} id={researchBoxInfo.id}/>
             }
 
             {!researchBoxInfo.disable && researchBoxInfo.activated &&

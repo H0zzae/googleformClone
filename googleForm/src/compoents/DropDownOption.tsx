@@ -6,7 +6,11 @@ import Tooltip from "@mui/material/Tooltip";
 import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
 import ClearIcon from "@mui/icons-material/Clear";
 
-export const DropDownOption = () => {
+interface optionInfo {
+    id : number;
+    type ?: string;
+}
+export const DropDownOption = (info:optionInfo) => {
     const [count, setCount] = useState<number>(1);
     const [optionList, setOptionList] = useState<string[]>([]);
     const createLi = () =>{

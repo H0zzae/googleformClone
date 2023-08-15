@@ -1,9 +1,11 @@
 import React from "react"
 import {FlexTopColumn} from "./ComponentStyle";
 import {MultipleChoiceOption} from "./MultipleChoiceOption";
+import {CheckBoxOption} from "./CheckBoxOption";
+import {DropDownOption} from "./DropDownOption";
 
 interface optionTypeinfo {
-    title?: string;
+    id: number;
     type ?:string;
     // disable : boolean;
 }
@@ -13,7 +15,12 @@ export const OptionType = (oinfo:optionTypeinfo) => {
         <>
             <FlexTopColumn >
                 <FlexTopColumn>
-                    <MultipleChoiceOption />
+                {oinfo.type ==='multipleChoice'?
+                    <MultipleChoiceOption id={oinfo.id} type={oinfo.type}/>
+                :oinfo.type === 'checkBox' ?
+                    <CheckBoxOption  id={oinfo.id} type={oinfo.type}/>
+                : <DropDownOption  id={oinfo.id} type={oinfo.type}/>
+                }
                 </FlexTopColumn>
             </FlexTopColumn>
         </>

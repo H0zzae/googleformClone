@@ -12,7 +12,11 @@ import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
 import ClearIcon from '@mui/icons-material/Clear';
 import Tooltip from "@mui/material/Tooltip";
 
-export const CheckBoxOption = () => {
+interface optionInfo {
+    id : number;
+    type ?: string;
+}
+export const CheckBoxOption = (info:optionInfo) => {
     const [checked, setChecked] = useState<boolean[]>([false]);
     const [optionList, setOptionList] = useState<string[]>([]);
     const defaultText = "옵션 "

@@ -7,6 +7,7 @@ interface FormItem {
     detail ?: string,
     type : string,
     subject ?:string,
+    options ?: any[], //{id : 0, value:'옵션 1', selected : false}
     activated : boolean,
     necessary : boolean,
 }

@@ -7,7 +7,7 @@ import {DropDownOption} from "./DropDownOption";
 interface optionTypeinfo {
     id: number;
     type ?:string;
-    // disable : boolean;
+    activated : boolean;
 }
 export const OptionType = (oinfo:optionTypeinfo) => {
 
@@ -16,10 +16,10 @@ export const OptionType = (oinfo:optionTypeinfo) => {
             <FlexTopColumn >
                 <FlexTopColumn>
                 {oinfo.type ==='multipleChoice'?
-                    <MultipleChoiceOption id={oinfo.id} type={oinfo.type}/>
+                    <MultipleChoiceOption id={oinfo.id} type={oinfo.type} activated={oinfo.activated}/>
                 :oinfo.type === 'checkBox' ?
-                    <CheckBoxOption  id={oinfo.id} type={oinfo.type}/>
-                : <DropDownOption  id={oinfo.id} type={oinfo.type}/>
+                    <CheckBoxOption  id={oinfo.id} type={oinfo.type} activated={oinfo.activated}/>
+                : <DropDownOption  id={oinfo.id} type={oinfo.type} activated={oinfo.activated}/>
                 }
                 </FlexTopColumn>
             </FlexTopColumn>

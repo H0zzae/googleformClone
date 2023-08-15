@@ -11,6 +11,7 @@ import {setForm} from "../research/slices/formSlice";
 interface optionInfo {
     id : number;
     type ?: string;
+    activated : boolean;
 }
 export const DropDownOption = (info:optionInfo) => {
     const {formList} = useAppSelector(state => state.form);
@@ -88,14 +89,16 @@ export const DropDownOption = (info:optionInfo) => {
                 <FlexLeftRow justifyContent={'space-between'}>
                     <FlexLeftRow>
                         <Typography sx={{padding: '9px 9px 9px 0'}}>{idx +1}</Typography>
-                        <Input value={item.value}
-                               sx={{margin: '9px 0', width:  600}}
-                               id={item.id}
-                               onChange={(e:ChangeEvent<HTMLInputElement>) => handleTextChange(e, item.id)}
-                        />
+                        {value==='write' && info.activated?
+                            <Input value={item.value}
+                                   sx={{margin: '9px 0', width:  600}}
+                                   id={item.id}
+                                   onChange={(e:ChangeEvent<HTMLInputElement>) => handleTextChange(e, item.id)}
+                            />
+                        : <Typography>{item.value}</Typography>}
                     </FlexLeftRow>
                     {/*해당 질문 클릭시에만 표시됨*/}
-                    {value==='write' && optionList.length >1 &&
+                    {value==='write' && info.activated && optionList.length >1 &&
                         <Tooltip title="삭제">
                             <IconButton arai-label="clear" onClick={() => removeOption(item.id)}>
                                 <ClearIcon />
@@ -105,7 +108,7 @@ export const DropDownOption = (info:optionInfo) => {
                 </FlexLeftRow>
             ))}
             {/*해당 질문 클릭시에만 표시됨*/}
-            {value==='write' &&
+            {value==='write' && info.activated &&
                 <FlexLeftRow paddingLeft={0}>
                     {/*padding: 9px 9px 9px 0, width: 24*/}
                     <Typography sx={{padding: '9px 9px 9px 0'}}>{count+1}</Typography>

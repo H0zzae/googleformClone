@@ -80,7 +80,7 @@ export const ResearchBox = (researchBoxInfo:ResearchBoxInfo)=> {
             :researchBoxInfo.type ==='longAnswer' ?
                 <LongAnswerType  disable={researchBoxInfo.disable}/>
             :
-                <OptionType type={researchBoxInfo.type} id={researchBoxInfo.id}/>
+                <OptionType type={researchBoxInfo.type} id={researchBoxInfo.id} activated={researchBoxInfo.activated}/>
             }
 
             {!researchBoxInfo.disable && researchBoxInfo.activated &&

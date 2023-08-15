@@ -19,6 +19,7 @@ import {setForm} from "../research/slices/formSlice";
 interface optionInfo {
     id : number;
     type ?: string;
+    activated : boolean;
 }
 
 export const MultipleChoiceOption = (info : optionInfo) => {
@@ -123,7 +124,7 @@ export const MultipleChoiceOption = (info : optionInfo) => {
                     <FlexLeftRow  justifyContent={'space-between'}>
                         <FlexLeftRow>
                             <Radio {...controlProps(item)} disabled={value==='write'} />
-                            {value==='write' ?
+                            {value==='write' && info.activated?
                                 <Input //defaultValue={defaultText + (optionList.length + 1).toString()}
                                    value={item?.value}
                                    sx={{margin: '9px 0', width:  600}}
@@ -134,13 +135,13 @@ export const MultipleChoiceOption = (info : optionInfo) => {
                             }
                             {/*hover시 표시됨*/}
                         </FlexLeftRow>
-                        {value==='write' &&
+                        {value==='write' && info.activated &&
                             <Tooltip title="이미지 추가">
                                 <ImageOutlinedIcon sx={{fontSize: 24}} />
                             </Tooltip>
                         }
                         {/*해당 질문 클릭시에만 표시됨*/}
-                        {optionList.length>1 && value==='write' &&
+                        {optionList.length>1 && info.activated && value==='write' &&
                             <Tooltip title="삭제">
                                 <IconButton arai-label="clear" onClick={() => removeOption(item.id)}>
                                     <ClearIcon />
@@ -150,7 +151,7 @@ export const MultipleChoiceOption = (info : optionInfo) => {
                     </FlexLeftRow>
                 ))}
                 {/*해당 질문 클릭시에만 표시됨*/}
-                {value==='write' &&
+                {value==='write' && info.activated &&
                     <FlexLeftRow paddingLeft={0}>
                         <Radio disabled value={'justIcon'}/>
                         <FlexLeftRow gap={8}>

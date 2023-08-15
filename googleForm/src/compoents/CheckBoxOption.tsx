@@ -16,6 +16,7 @@ import {setForm} from "../research/slices/formSlice";
 interface optionInfo {
     id : number;
     type ?: string;
+    activated : boolean;
 }
 export const CheckBoxOption = (info:optionInfo) => {
     const {formList} = useAppSelector(state => state.form);
@@ -101,7 +102,7 @@ export const CheckBoxOption = (info:optionInfo) => {
                 <FlexLeftRow  justifyContent={'space-between'}>
                     <FlexLeftRow>
                         <Checkbox onChange={handleChange} checked={item.selected} disabled={value==='write'} id={item.id} />
-                        {value==='write' ?
+                        {value==='write' && info.activated ?
                             <Input value={item.value}
                                    sx={{margin: '9px 0', width:  600}}
                                    id={item.id}
@@ -111,13 +112,13 @@ export const CheckBoxOption = (info:optionInfo) => {
                         }
                         {/*hover시 표시됨*/}
                     </FlexLeftRow>
-                    {value==='write' &&
+                    {value==='write' && info.activated &&
                         <Tooltip title="이미지 추가">
                             <ImageOutlinedIcon sx={{fontSize: 24}} />
                         </Tooltip>
                     }
                     {/*해당 질문 클릭시에만 표시됨*/}
-                    {value==='write' && optionList.length>1 &&
+                    {value==='write' && info.activated && optionList.length>1 &&
                         <Tooltip title="삭제">
                             <IconButton arai-label="clear" onClick={() => removeOption(item.id)}>
                                 <ClearIcon />
@@ -127,7 +128,7 @@ export const CheckBoxOption = (info:optionInfo) => {
                 </FlexLeftRow>
             ))}
             {/*해당 질문 클릭시에만 표시됨*/}
-            {value==='write' &&
+            {value==='write' && info.activated &&
                 <FlexLeftRow paddingLeft={0}>
                     <Checkbox disabled />
                     <FlexLeftRow gap={8}>
@@ -140,8 +141,6 @@ export const CheckBoxOption = (info:optionInfo) => {
                                        onKeyDown:(event:KeyboardEvent<HTMLInputElement>) => {addOptionValueWithKeyBoard(event)}
                                    }}
                         />
-                        <Typography variant={"body1"}> 또는 </Typography>
-                        <Button variant={"text"} size={"small"} sx={{color: "#1976d2"}}>'기타' 추가</Button>
                     </FlexLeftRow>
                 </FlexLeftRow>
             }

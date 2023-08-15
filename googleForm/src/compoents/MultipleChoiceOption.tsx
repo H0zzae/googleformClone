@@ -50,18 +50,12 @@ export const MultipleChoiceOption = (info : optionInfo) => {
         setOptionList(changed);
     }
     const handleTextChange = useCallback((event : ChangeEvent<HTMLInputElement>, id:number) => {
-        const targetForm = formList[info.id];
-        const modOption = targetForm.options?.map((i) => {
+        const modOption = optionList?.map((i) => {
             if (i?.id === id) {
                 return {...i, value: event.target.value}
             } else return i
         });
-        const modForm = formList.map((i) => {
-            if (i.id === info.id) {
-                return {...i, options: modOption}
-            } else return i
-        })
-        dispatch(setForm(modForm));
+        saveModOption(modOption);
     },[dispatch, formList]);
 
     const addETC = useCallback(() => {

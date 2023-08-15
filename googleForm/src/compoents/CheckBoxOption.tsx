@@ -53,6 +53,14 @@ export const CheckBoxOption = (info:optionInfo) => {
         dispatch(setForm(modForm));
         setOptionList(changed);
     }
+    const handleTextChange = useCallback((event : ChangeEvent<HTMLInputElement>, id:number) => {
+        const modOption = optionList?.map((i) => {
+            if (i?.id === id) {
+                return {...i, value: event.target.value}
+            } else return i
+        });
+        saveModOption(modOption);
+    },[dispatch, formList]);
 
     const addOptionValue = useCallback((event : FocusEvent<HTMLInputElement>) => {
         if (newInputText !=='') {
@@ -97,6 +105,7 @@ export const CheckBoxOption = (info:optionInfo) => {
                             <Input value={item.value}
                                    sx={{margin: '9px 0', width:  600}}
                                    id={item.id}
+                                   onChange={(e:ChangeEvent<HTMLInputElement>) => handleTextChange(e, item.id)}
                             />
                             : <Typography>{item.value}</Typography>
                         }

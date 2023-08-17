@@ -19,6 +19,7 @@ export const MenuBar = () => {
     const {formList} = useAppSelector(state => state.form);
     const {value} = useAppSelector(state => state.user);
     const dispatch = useAppDispatch();
+    const [scrollY, setScrollY] = useState<number>(0);
 
     const AddForm = useCallback((event:any) => {
         event.preventDefault();
@@ -47,8 +48,17 @@ export const MenuBar = () => {
         dispatch(setVisible(param));
     },[dispatch, value, formList]);
 
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        }
+    }, []);
+    const handleScroll = () => {
+        setScrollY(window.scrollY < 0? 150 : window.scrollY + 150);
+    }
     return(
-        <FloatingBar>
+        <FloatingBar yposition={scrollY}>
             {value==="preview" ?
                 <Tooltip title={"설문 수정"}>
                     <IconButton onClick={()=>changeValue("write")}>

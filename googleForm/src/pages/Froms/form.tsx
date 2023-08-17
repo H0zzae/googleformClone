@@ -1,11 +1,9 @@
 import React, {useCallback, useEffect, useState} from "react";
-import {MenuBar, ResearchBox, ShortAnswerType, SubmitSection, TitleSection} from "../../compoents";
+import {MenuBar, ResearchBox, SubmitSection, TitleSection} from "../../compoents";
 import * as style from "../../compoents/ComponentStyle";
 import {FormSection} from "./formStyle";
-import {DragList} from "../../compoents/ComponentStyle";
 import {useAppDispatch, useAppSelector} from "../../research/config";
 import {setForm, FormItem} from "../../research/slices/formSlice";
-import {Button} from "@mui/material";
 
 
 const Form = () =>{

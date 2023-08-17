@@ -87,11 +87,11 @@ export const SelectBox = styled(Select)`
   padding: 0;
 `
 
-export const FloatingBar = styled.div`
+export const FloatingBar = styled.div<{ yposition: number }>`
   width: 48px;
   display: flex;
   position: absolute;
-  top: 150px;
+  top: ${props => props.yposition}px;
   right: -62px;
   flex-direction: column;
   align-items: center;

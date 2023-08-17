@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from "react"
+import React, {useCallback} from "react"
 import { MenuItem, Select, SelectChangeEvent, Typography} from "@mui/material";
 import ShortTextIcon from '@mui/icons-material/ShortText';
 import SubjectIcon from '@mui/icons-material/Subject';
@@ -32,7 +32,7 @@ export const AnswerTypeSelect =(info : selectedType) => {
         const modForm = formList.map((i) => {
             if (i.id === info.id){
                 console.log(event.target.value, event.target.value.includes('Answer'), i?.options?.length)
-                if (!event.target.value.includes('Answer') && i?.options === undefined || i?.options?.length===0){
+                if ((!event.target.value.includes('Answer') && (i?.options === undefined)) || (i?.options?.length===0)){
                     return { ...i, type : event.target.value, options : [{id : 0, value:'옵션 1', selected : false}]}
                 }
                 return {...i, type: event.target.value}
@@ -41,7 +41,7 @@ export const AnswerTypeSelect =(info : selectedType) => {
         })
         console.log("changed", modForm);
         dispatch(setForm(modForm))
-    },[dispatch, formList]);
+    },[dispatch, formList, info.id]);
 
     return(
         <Select

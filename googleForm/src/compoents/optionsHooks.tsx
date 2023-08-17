@@ -8,10 +8,7 @@ export interface optionInfo {
 }
 const OptionsHooks = (id : number) => {
     const {formList} = useAppSelector(state => state.form);
-    const {value} = useAppSelector(state => state.user);
     const dispatch = useAppDispatch();
-    const [newInputText, setNewInputText] = useState<string>();
-    const [checkedValue, setCheckedValue] = useState<string>('undefined');
     const [optionList, setOptionList] = useState<any[]>([]);
     const defaultText = "옵션 "
 

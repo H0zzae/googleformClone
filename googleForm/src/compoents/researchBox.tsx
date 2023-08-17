@@ -1,4 +1,4 @@
-import React, {ChangeEvent, FocusEventHandler, useCallback, useState} from "react";
+import React, {ChangeEvent, useCallback, useState} from "react";
 import {ResearchBottomSection} from "./ResearchBottomSection";
 import {OptionType} from "./OptionType";
 import {ShortAnswerType} from "./ShortAnswerType";

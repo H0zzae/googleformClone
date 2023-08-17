@@ -8,7 +8,6 @@ import {setForm, FormItem} from "../../research/slices/formSlice";
 
 const Form = () =>{
     const {formList} = useAppSelector(state => state.form);
-    const [formTitle, setFormTitle] = useState('');
     const {value} = useAppSelector(state => state.user);
     const dispatch = useAppDispatch();
     const [dragList, setDragList] = useState<FormItem[]>(formList);
@@ -29,7 +28,7 @@ const Form = () =>{
         });
         setDragList(orderList);
         dispatch(setForm(orderList));
-    },[dispatch, formList])
+    },[dispatch])
 
     // 브라우저 상에 보여지는 데이터 리스트
     const dragListRow = (record: any, index: number) => (

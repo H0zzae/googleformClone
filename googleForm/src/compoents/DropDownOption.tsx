@@ -1,6 +1,6 @@
 import React, {ChangeEvent, FocusEvent, KeyboardEvent, useCallback, useEffect, useState} from "react"
 import {FlexLeftRow, FlexTopColumn} from "./ComponentStyle";
-import {Button, Checkbox, IconButton, Input, TextField, Typography} from "@mui/material";
+import {IconButton, Input, TextField, Typography} from "@mui/material";
 import Tooltip from "@mui/material/Tooltip";
 import ClearIcon from "@mui/icons-material/Clear";
 import {useAppDispatch, useAppSelector} from "../research/config";

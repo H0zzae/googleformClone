@@ -46,7 +46,7 @@ export const MenuBar = () => {
         });
         dispatch(setForm(modForm));
         dispatch(setVisible(param));
-    },[dispatch, value, formList]);
+    },[dispatch, formList]);
 
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);

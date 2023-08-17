@@ -31,13 +31,15 @@ export const AnswerTypeSelect =(info : selectedType) => {
     const handleChange = useCallback((event: SelectChangeEvent) => {
         const modForm = formList.map((i) => {
             if (i.id === info.id){
-                if (!event.target.value.includes('Answer')){
+                console.log(event.target.value, event.target.value.includes('Answer'), i?.options?.length)
+                if (!event.target.value.includes('Answer') && i?.options === undefined || i?.options?.length===0){
                     return { ...i, type : event.target.value, options : [{id : 0, value:'옵션 1', selected : false}]}
                 }
                 return {...i, type: event.target.value}
             }
-            else return i
+            else return {...i}
         })
+        console.log("changed", modForm);
         dispatch(setForm(modForm))
     },[dispatch, formList]);
 

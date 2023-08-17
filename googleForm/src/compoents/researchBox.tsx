@@ -25,13 +25,13 @@ export const ResearchBox = (researchBoxInfo:ResearchBoxInfo)=> {
     const {value} = useAppSelector(state => state.user);
     const dispatch = useAppDispatch();
 
-    const formItem = formList.map((i) => {if (i.id === researchBoxInfo.id) return i})[0];
+    const formItem = formList?.map((i) => {if (i.id === researchBoxInfo.id) return i})[0];
 
     const [itemTitle, setTitle] = useState<string>(researchBoxInfo.title || '이름');
 
     const onChangeTitle = useCallback((event:ChangeEvent<HTMLInputElement>) => {
         setTitle(event.target.value);
-        const modForm = formList.map((i) => {
+        const modForm = formList?.map((i) => {
             if (i.id === researchBoxInfo.id){
                 return {...i, title : event.target.value}
             }else return i

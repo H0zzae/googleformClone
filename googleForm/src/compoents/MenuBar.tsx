@@ -11,20 +11,10 @@ import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutl
 import {IconButton} from "@mui/material";
 import {FloatingBar} from "./ComponentStyle";
 import {useAppDispatch, useAppSelector} from "../research/config";
-import {setForm} from "../research/slices/formSlice";
+import {setForm,FormItem} from "../research/slices/formSlice";
 import {setVisible} from "../research/slices/userSlice";
 
 
-interface FormItem {
-    id: number,
-    // order : number,
-    title?: string,
-    detail ?: string,
-    type : string,
-    subject ?:string,
-    activated: boolean,
-    necessary : boolean,
-}
 export const MenuBar = () => {
     const {formList} = useAppSelector(state => state.form);
     const {value} = useAppSelector(state => state.user);
@@ -35,6 +25,7 @@ export const MenuBar = () => {
 
         const AddItem: FormItem = {
             id : (!formList.length) ? 0 : Math.max(...formList.map((item) => item.id)) + 1,
+            order : (!formList.length) ? 0 : Math.max(...formList.map((item) => item.id)) + 1,
             type : "shortAnswer",
             activated : true,
             necessary : false,

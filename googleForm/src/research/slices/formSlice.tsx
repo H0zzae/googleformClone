@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface FormItem {
+export interface FormItem {
     id: number,
-    // order : number,
+    order : number,
     title?: string,
     detail ?: string,
     type : string,

@@ -21,12 +21,7 @@ export interface ResearchBoxInfo {
 
 
 export const ResearchBox = (researchBoxInfo:ResearchBoxInfo)=> {
-    const {formList} = useAppSelector(state => state.form);
-    const {value} = useAppSelector(state => state.user);
-    const dispatch = useAppDispatch();
-
-    const formItem = formList?.map((i) => {if (i.id === researchBoxInfo.id) return i})[0];
-
+    const {formList} = useAppSelector(state => state.form);const dispatch = useAppDispatch();
     const [itemTitle, setTitle] = useState<string>(researchBoxInfo.title || '이름');
 
     const onChangeTitle = useCallback((event:ChangeEvent<HTMLInputElement>) => {
@@ -40,13 +35,14 @@ export const ResearchBox = (researchBoxInfo:ResearchBoxInfo)=> {
     },[dispatch, formList]);
     const handleFocusEvent = useCallback((e:any) => {
         const targetForm = formList.findIndex((i) => i.id === researchBoxInfo.id);
+        console.log(researchBoxInfo.id , formList[targetForm]);
         if (!formList[targetForm]?.activated && !researchBoxInfo.disable) {
             const modForm = formList.map((i) => {
                 if (i.id === researchBoxInfo.id) {
                     return {...i, activated: true}
                 } else return {...i, activated: false}
             })
-            modForm !== formList && dispatch(setForm(modForm));
+            dispatch(setForm(modForm));
         }
     },[dispatch, formList])
 
@@ -66,7 +62,7 @@ export const ResearchBox = (researchBoxInfo:ResearchBoxInfo)=> {
                         />
 
                     </FlexLeftRow>
-                    <ImageOutlinedIcon sx={{fontSize: 24}} onClick ={() => console.log(formItem)}/>
+                    <ImageOutlinedIcon sx={{fontSize: 24}}/>
                     <AnswerTypeSelect id={researchBoxInfo.id} type={researchBoxInfo.type}/>
                 </FlexLeftRow>
             :

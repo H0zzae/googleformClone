@@ -40,7 +40,7 @@ export const ResearchBox = (researchBoxInfo:ResearchBoxInfo)=> {
     },[dispatch, formList]);
     const handleFocusEvent = useCallback((e:any) => {
         const targetForm = formList.findIndex((i) => i.id === researchBoxInfo.id);
-        if (!formList[targetForm].activated && !researchBoxInfo.disable) {
+        if (!formList[targetForm]?.activated && !researchBoxInfo.disable) {
             const modForm = formList.map((i) => {
                 if (i.id === researchBoxInfo.id) {
                     return {...i, activated: true}

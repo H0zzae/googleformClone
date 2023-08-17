@@ -80,7 +80,8 @@ const OptionsHooks = (id : number) => {
         const changed = prevOption.map((i) => {return {...i, selected : false}})
         saveModOption(changed);
     },[dispatch, formList])
-    return {currentOption,
+    return {calMaxNum,
+        currentOption,
         saveModOption,
         handleTextChange,
         addOptionValue,

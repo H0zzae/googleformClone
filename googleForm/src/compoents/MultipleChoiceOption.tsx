@@ -1,4 +1,4 @@
-import React, {ChangeEvent, FocusEvent, KeyboardEvent, useCallback, useEffect, useState} from "react"
+import React, {ChangeEvent, KeyboardEvent, useCallback, useEffect, useState} from "react"
 import {FlexLeftRow} from "./ComponentStyle";
 import {
     Button,
@@ -14,7 +14,6 @@ import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
 import ClearIcon from '@mui/icons-material/Clear';
 import Tooltip from "@mui/material/Tooltip";
 import {useAppDispatch, useAppSelector} from "../research/config";
-import {setForm} from "../research/slices/formSlice";
 import OptionsHooks, {optionInfo} from "./optionsHooks";
 
 export const MultipleChoiceOption = (info : optionInfo) => {
@@ -24,7 +23,6 @@ export const MultipleChoiceOption = (info : optionInfo) => {
     const [newInputText, setNewInputText] = useState<string>();
     const [checkedValue, setCheckedValue] = useState<string>('undefined');
     const [optionList, setOptionList] = useState<any[]>([]);
-    const defaultText = "옵션 "
     const optionsfun = OptionsHooks(info.id);
 
     useEffect(() => {

@@ -1,8 +1,9 @@
 import React from "react"
 import {FlexLeftRow, FlexTopColumn} from "./ComponentStyle";
-import {LongAnswerInputBox} from "./LongAnswerInputBox";
+import {Input} from "@mui/material";
 
 interface longAnswerInfo {
+    id : number;
     text ?: string;
     type ?: string;
     disable : boolean;
@@ -13,7 +14,7 @@ export const LongAnswerType = (lainfo : longAnswerInfo) => {
         <>
             <FlexTopColumn>
                 <FlexLeftRow>
-                    <LongAnswerInputBox  text={lainfo.text} disable={lainfo.disable}/>
+                    <Input placeholder={"장문형 텍스트"} multiline value = {lainfo.text} disabled={!lainfo.disable} sx={{margin: '9px 0', width:'100%'}} />
                 </FlexLeftRow>
             </FlexTopColumn>
         </>

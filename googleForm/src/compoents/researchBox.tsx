@@ -21,7 +21,8 @@ export interface ResearchBoxInfo {
 
 
 export const ResearchBox = (researchBoxInfo:ResearchBoxInfo)=> {
-    const {formList} = useAppSelector(state => state.form);const dispatch = useAppDispatch();
+    const {formList} = useAppSelector(state => state.form);
+    const dispatch = useAppDispatch();
     const [itemTitle, setTitle] = useState<string>(researchBoxInfo.title || '이름');
 
     const onChangeTitle = useCallback((event:ChangeEvent<HTMLInputElement>) => {
@@ -72,9 +73,9 @@ export const ResearchBox = (researchBoxInfo:ResearchBoxInfo)=> {
                 </>
             }
             {researchBoxInfo.type ==="shortAnswer"?
-                <ShortAnswerType disable={researchBoxInfo.disable}/>
+                <ShortAnswerType disable={researchBoxInfo.disable} id={researchBoxInfo.id}/>
             :researchBoxInfo.type ==='longAnswer' ?
-                <LongAnswerType  disable={researchBoxInfo.disable}/>
+                <LongAnswerType  disable={researchBoxInfo.disable} id={researchBoxInfo.id}/>
             :
                 <OptionType type={researchBoxInfo.type} id={researchBoxInfo.id} activated={researchBoxInfo.activated}/>
             }

@@ -1,14 +1,10 @@
 import React, {ChangeEvent, useCallback, useState} from "react";
-import {ResearchBottomSection} from "./ResearchBottomSection";
-import {OptionType} from "./OptionType";
-import {ShortAnswerType} from "./ShortAnswerType";
-import {LongAnswerType} from "./LongAnswerType";
 import {FlexLeftRow, RedText,ResearchDiv, BlueBox} from "./ComponentStyle";
 import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
-import {AnswerTypeSelect} from "./AnswerTypeSelect";
 import {useAppDispatch, useAppSelector} from "../research/config";
 import {setForm} from "../research/slices/formSlice";
 import {TextField, Typography} from "@mui/material";
+import {ResearchBottomSection, OptionType, AnswerTypeSelect, TextAnswerType} from "../compoents";
 
 export interface ResearchBoxInfo {
     id : number;
@@ -72,10 +68,8 @@ export const ResearchBox = (researchBoxInfo:ResearchBoxInfo)=> {
                     {researchBoxInfo.checked && <RedText sx={{display : "inline"}}> *</RedText>}
                 </>
             }
-            {researchBoxInfo.type ==="shortAnswer"?
-                <ShortAnswerType disable={researchBoxInfo.disable} id={researchBoxInfo.id}/>
-            :researchBoxInfo.type ==='longAnswer' ?
-                <LongAnswerType  disable={researchBoxInfo.disable} id={researchBoxInfo.id}/>
+            {researchBoxInfo.type?.includes('Answer')?
+                <TextAnswerType disable={researchBoxInfo.disable} id={researchBoxInfo.id} type={researchBoxInfo.type}/>
             :
                 <OptionType type={researchBoxInfo.type} id={researchBoxInfo.id} activated={researchBoxInfo.activated}/>
             }

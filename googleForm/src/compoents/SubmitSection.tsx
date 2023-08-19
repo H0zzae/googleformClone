@@ -16,7 +16,7 @@ export const SubmitSection = () => {
         console.log('필수항목 안채워짐');
         const prevForm = [...formList];
         const changed = prevForm.map((item) => {
-            return list.includes(item.id) ? {...item, status : false} : item
+            return list.includes(item.id) ? {...item, status : false} : {...item, status : true}
         })
         dispatch(setForm(changed));
     },[dispatch]);
@@ -26,7 +26,7 @@ export const SubmitSection = () => {
             console.log(i);
             if (i.necessary) {
                 if (i.type.includes('Answer')){
-                    if (i.detail==undefined || (i.detail?.length > 0)){
+                    if (i.subject==undefined || (i.subject?.length <= 0)){
                         falseList.push(idx);
                     }
                 }else if(i?.options) {

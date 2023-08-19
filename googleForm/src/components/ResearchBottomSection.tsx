@@ -40,7 +40,6 @@ export const ResearchBottomSection = (info:BottomSectionInfo) =>{
     },[dispatch, formList]);
 
     const handleSwitch = useCallback((event : React.ChangeEvent<HTMLInputElement>) => {
-        console.log(info.id,  event.target.checked);
         const modForm = formList.map((i) => {
             if (i.id === info.id){
                 return {...i, necessary : event.target.checked}

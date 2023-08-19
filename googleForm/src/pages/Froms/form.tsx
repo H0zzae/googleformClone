@@ -17,12 +17,12 @@ const Form = () =>{
     }, [formList, dispatch]);
 
     useEffect(() => {
-        console.log("dragList : ", dragList);
+        // console.log("dragList : ", dragList);
     }, [dragList]);
 
     const handleUpdate = useCallback((evt: any, updated: any) => {
-        console.log(evt); // tslint:disable-line
-        console.log("updated: \n",updated); // tslint:disable-line
+        //console.log(evt); // tslint:disable-line
+        //console.log("updated: \n",updated); // tslint:disable-line
         const orderList = [...updated].map((item, idx) => {
             return {...item, order: idx}
         });

@@ -23,25 +23,21 @@ export const CheckBoxOption = (info:optionInfo) => {
     const optionsfun = OptionsHooks(info.id);
 
     useEffect(() => {
-        console.log(optionsfun.currentOption());
         setOptionList(optionsfun.currentOption())
         setNewInputText('');
     }, [formList, dispatch]);
 
     useEffect(() => {
-        console.log("value : ", value);
         optionsfun.resetOptionSelected();
     }, [value]);
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        console.log("prev : \n", optionList);
         const modOption = optionList.map((i) => {
             if (i.id == event.target.id) {
                 return {...i, selected : !(i.selected)}
             }else return i
         })
         optionsfun.saveModOption(modOption)
-        console.log("after : \n" , optionList);
     };
 
 

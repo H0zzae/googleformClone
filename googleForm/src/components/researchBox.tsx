@@ -32,7 +32,6 @@ export const ResearchBox = (researchBoxInfo:ResearchBoxInfo)=> {
     },[dispatch, formList]);
     const handleFocusEvent = useCallback((e:any) => {
         const targetForm = formList.findIndex((i) => i.id === researchBoxInfo.id);
-        console.log(researchBoxInfo.id , formList[targetForm]);
         if (!formList[targetForm]?.activated && !researchBoxInfo.disable) {
             const modForm = formList.map((i) => {
                 if (i.id === researchBoxInfo.id) {
@@ -63,10 +62,10 @@ export const ResearchBox = (researchBoxInfo:ResearchBoxInfo)=> {
                     <AnswerTypeSelect id={researchBoxInfo.id} type={researchBoxInfo.type}/>
                 </FlexLeftRow>
             :
-                <>
-                    <Typography variant="body1" sx={{fontSize: '16px', fontWeight : 400, marginBottom: '16px', whiteSpace : 'nowrap', display : "inline"}}>{itemTitle}</Typography>
+                <div style={{marginBottom: '16px'}}>
+                    <Typography variant="body1" sx={{fontSize: '16px', fontWeight : 400, whiteSpace : 'nowrap', display : "inline"}}>{itemTitle}</Typography>
                     {researchBoxInfo.checked && <RedText sx={{display : "inline"}}> *</RedText>}
-                </>
+                </div>
             }
             {researchBoxInfo.type?.includes('Answer')?
                 <TextAnswerType disable={researchBoxInfo.disable} id={researchBoxInfo.id} type={researchBoxInfo.type}/>

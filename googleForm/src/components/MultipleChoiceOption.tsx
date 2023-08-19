@@ -26,13 +26,11 @@ export const MultipleChoiceOption = (info : optionInfo) => {
     const optionsfun = OptionsHooks(info.id);
 
     useEffect(() => {
-        console.log(optionsfun.currentOption());
         setOptionList(optionsfun.currentOption())
         setNewInputText('');
     }, [formList, dispatch]);
 
     useEffect(() => {
-        console.log("value : ", value);
         optionsfun.resetOptionSelected();
     }, [value]);
 

@@ -47,11 +47,26 @@ export const SubmitSection = () => {
         console.log("falseList : ", falseList);
         (falseList.length ===0) ? changeValueToSubmit() : notFullfilled(falseList);
     }
+
+    const removeAnswer = useCallback(() => {
+        const prev = [...formList];
+        const changed = prev.map((i) => {
+            if (i.type.includes('Answer')){
+                return {...i, subject : ''}
+            }else {
+                const prevOption = i.options;
+                const resetSelect = prevOption?.map((option) => {return {...option, selected : false}});
+                return {...i, options : resetSelect};
+            }
+        })
+        dispatch(setForm(changed));
+    },[dispatch])
+
     return(
         <>
             <FlexLeftRow justifyContent={'space-between'}>
                 <Button variant={"contained"} sx={{padding: '6px 24px'}} onClick={submitAction}>제출</Button>
-                <Button variant={"text"}>양식 지우기</Button>
+                <Button variant={"text"} onClick={removeAnswer}>양식 지우기</Button>
             </FlexLeftRow>
         </>
     )

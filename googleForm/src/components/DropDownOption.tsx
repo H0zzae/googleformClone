@@ -16,6 +16,7 @@ export const DropDownOption = (info:optionInfo) => {
     const [count, setCount] = useState<number>(1);
     const [optionList, setOptionList] = useState<any[]>([]);
     const [answer, setAnswer] = useState<string>('');
+    const [answerValue, setAnswerValue] = useState<string>('');
     const optionsfun = OptionsHooks(info.id);
 
     useEffect(() => {
@@ -52,29 +53,38 @@ export const DropDownOption = (info:optionInfo) => {
     },[dispatch, formList])
     const handleChange = useCallback((event: SelectChangeEvent) => {
         const modOption = optionList.map((i) => {
-            if (i.id == event.target.value) {
-                return {...i, selected : !(i.selected)}
-            }else return i
+            if (i.id.toString() == event.target.value) {
+                return {...i, selected : true}
+            }else return {...i, selected : false}
         })
         optionsfun.saveModOption(modOption);
-        setAnswer(event.target.value)
-    },[dispatch])
+        setOptionList(modOption);
+        setAnswer(event.target.value);
+        submitText(event.target.value);
+    },[dispatch, formList])
+    const submitText = (num : string) => {
+        const targetIDX = optionList.findIndex((i) => i.id.toString() == num);
+        const ret = optionList[targetIDX]?.value;
+        setAnswerValue(ret);
+    }
     return(
         <FlexTopColumn>
-            {value==='write' && info.activated ?
+            {value==='write' ?
             optionList?.map((item, idx) => (
                 <FlexLeftRow justifyContent={'space-between'}>
-                    {value==='write' && info.activated &&
                     <FlexLeftRow>
                         <Typography sx={{padding: '9px 9px 9px 0'}}>{idx +1}</Typography>
+                        { info.activated ?
                             <Input value={item.value}
                                    sx={{margin: '9px 0', width:  600}}
                                    id={item.id}
                                    onChange={(e:ChangeEvent<HTMLInputElement>) => optionsfun.handleTextChange(e, item.id)}
                             />
-                    </FlexLeftRow>}
+                            :<Typography>{item.value}</Typography>
+                        }
+                    </FlexLeftRow>
                     {/*해당 질문 클릭시에만 표시됨*/}
-                    {value==='write' && info.activated && optionList.length >1 &&
+                    { info.activated && optionList.length >1 &&
                         <Tooltip title="삭제">
                             <IconButton arai-label="clear" onClick={() => removeOption(item.id)}>
                                 <ClearIcon />
@@ -83,8 +93,8 @@ export const DropDownOption = (info:optionInfo) => {
                     }
                 </FlexLeftRow>
             ))
-            : <Select value={answer}
-                      displayEmpty
+            : value==='preview' ?
+                <Select value={answer}
                       onChange={handleChange}
                       sx={{width :176}}
                       inputProps={{ 'aria-label': 'Without label' }}
@@ -93,7 +103,8 @@ export const DropDownOption = (info:optionInfo) => {
                     <Divider />
                     {optionList.map((i) =>
                     <MenuItem value={i.id}> {i.value}</MenuItem>)}
-            </Select>
+                </Select>
+            : <Typography>{answerValue}</Typography>
             }
             {/*해당 질문 클릭시에만 표시됨*/}
             {value==='write' && info.activated &&

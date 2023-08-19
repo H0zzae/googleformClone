@@ -48,7 +48,7 @@ const Form = () =>{
                 rowClassName='simple-drag-row'
                 onUpdate={handleUpdate} //정렬 목록이 변경될 때 호출됨
             />
-            {value!=='write' &&
+            {value==='preview' &&
                 <SubmitSection />
             }
         </FormSection>

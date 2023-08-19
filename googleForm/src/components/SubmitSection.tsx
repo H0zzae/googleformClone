@@ -3,15 +3,17 @@ import {FlexLeftRow} from "./ComponentStyle";
 import {Button} from "@mui/material";
 import {useAppDispatch, useAppSelector} from "../research/config";
 import {setForm} from "../research/slices/formSlice";
+import {setVisible} from "../research/slices/userSlice";
 
 export const SubmitSection = () => {
     const {formList} = useAppSelector(state => state.form);
     const {value} = useAppSelector(state => state.user);
     const dispatch = useAppDispatch();
 
-    const changeValueToSubmit = () => {
+    const changeValueToSubmit = useCallback(() => {
         alert('필수항목 다채워짐');
-    }
+        dispatch(setVisible('submit'));
+    },[dispatch])
 
     const notFullfilled = useCallback((list:number[]) => {
         console.log('필수항목 안채워짐');

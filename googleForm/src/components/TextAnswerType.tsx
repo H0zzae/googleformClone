@@ -3,9 +3,9 @@ import {FlexLeftRow, FlexTopColumn} from "./ComponentStyle";
 import {useAppDispatch, useAppSelector} from "../research/config";
 import {Input} from "@mui/material";
 import {setForm} from "../research/slices/formSlice";
+
 interface shortAnswerInfo {
     id : number;
-    text ?: string;
     type ?: string;
     disable : boolean;
 }

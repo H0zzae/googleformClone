@@ -1,6 +1,6 @@
 import React, {ChangeEvent, useState} from "react"
 import {PurpleLineDiv, ResearchDiv, RedText} from "./ComponentStyle";
-import {Input, TextField, Typography} from "@mui/material";
+import {Input, Typography} from "@mui/material";
 import Divider from "@mui/material/Divider";
 
 interface TitleInfo {

@@ -12,6 +12,7 @@ export const SubmitSection = () => {
     const changeValueToSubmit = () => {
         alert('필수항목 다채워짐');
     }
+
     const notFullfilled = useCallback((list:number[]) => {
         console.log('필수항목 안채워짐');
         const prevForm = [...formList];
@@ -20,10 +21,10 @@ export const SubmitSection = () => {
         })
         dispatch(setForm(changed));
     },[dispatch]);
+
     const submitAction = () => {
         let falseList:number[] = [];
         formList.forEach((i, idx) => {
-            console.log(i);
             if (i.necessary) {
                 if (i.type.includes('Answer')){
                     if (i.subject==undefined || (i.subject?.length <= 0)){

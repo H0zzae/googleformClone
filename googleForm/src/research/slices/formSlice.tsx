@@ -10,6 +10,7 @@ export interface FormItem {
     options ?: any[], //{id : 0, value:'옵션 1', selected : false}
     activated : boolean,
     necessary : boolean,
+    status : boolean, // 0 : error, 1 : pass
 }
 
 export interface CommonState {

@@ -30,10 +30,11 @@ export const MenuBar = () => {
             type : "shortAnswer",
             activated : true,
             necessary : false,
+            status : true,
         };
         const prevForm = formList.map((i) => {
             if(i.activated){
-                return{...i, activated : false, necessary : false }
+                return{...i, activated : false }
             }else return i
         });
         const setFormList = [...prevForm, AddItem];

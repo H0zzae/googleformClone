@@ -1,10 +1,11 @@
 import React, {ChangeEvent, FocusEvent, KeyboardEvent, useCallback, useEffect, useState} from "react"
 import {FlexLeftRow, FlexTopColumn} from "./ComponentStyle";
-import {IconButton, Input, TextField, Typography} from "@mui/material";
+import {IconButton, Input, MenuItem, Select, SelectChangeEvent, TextField, Typography} from "@mui/material";
 import Tooltip from "@mui/material/Tooltip";
 import ClearIcon from "@mui/icons-material/Clear";
 import {useAppDispatch, useAppSelector} from "../research/config";
 import OptionsHooks, {optionInfo} from "./optionsHooks";
+import Divider from "@mui/material/Divider";
 
 
 export const DropDownOption = (info:optionInfo) => {
@@ -14,16 +15,15 @@ export const DropDownOption = (info:optionInfo) => {
     const [newInputText, setNewInputText] = useState<string>();
     const [count, setCount] = useState<number>(1);
     const [optionList, setOptionList] = useState<any[]>([]);
+    const [answer, setAnswer] = useState<string>('');
     const optionsfun = OptionsHooks(info.id);
 
     useEffect(() => {
-        console.log(optionsfun.currentOption());
         setOptionList(optionsfun.currentOption())
         setNewInputText('');
     }, [formList, dispatch]);
 
     useEffect(() => {
-        console.log("value : ", value);
         optionsfun.resetOptionSelected();
     }, [value]);
 
@@ -50,21 +50,29 @@ export const DropDownOption = (info:optionInfo) => {
         optionsfun.removeOption(id);
         delelteLi();
     },[dispatch, formList])
-
+    const handleChange = useCallback((event: SelectChangeEvent) => {
+        const modOption = optionList.map((i) => {
+            if (i.id == event.target.value) {
+                return {...i, selected : !(i.selected)}
+            }else return i
+        })
+        optionsfun.saveModOption(modOption);
+        setAnswer(event.target.value)
+    },[dispatch])
     return(
         <FlexTopColumn>
-            {optionList?.map((item, idx) => (
+            {value==='write' && info.activated ?
+            optionList?.map((item, idx) => (
                 <FlexLeftRow justifyContent={'space-between'}>
+                    {value==='write' && info.activated &&
                     <FlexLeftRow>
                         <Typography sx={{padding: '9px 9px 9px 0'}}>{idx +1}</Typography>
-                        {value==='write' && info.activated?
                             <Input value={item.value}
                                    sx={{margin: '9px 0', width:  600}}
                                    id={item.id}
                                    onChange={(e:ChangeEvent<HTMLInputElement>) => optionsfun.handleTextChange(e, item.id)}
                             />
-                        : <Typography>{item.value}</Typography>}
-                    </FlexLeftRow>
+                    </FlexLeftRow>}
                     {/*해당 질문 클릭시에만 표시됨*/}
                     {value==='write' && info.activated && optionList.length >1 &&
                         <Tooltip title="삭제">
@@ -74,7 +82,19 @@ export const DropDownOption = (info:optionInfo) => {
                         </Tooltip>
                     }
                 </FlexLeftRow>
-            ))}
+            ))
+            : <Select value={answer}
+                      displayEmpty
+                      onChange={handleChange}
+                      sx={{width :176}}
+                      inputProps={{ 'aria-label': 'Without label' }}
+                >
+                    <MenuItem value={""} disabled>선택</MenuItem>
+                    <Divider />
+                    {optionList.map((i) =>
+                    <MenuItem value={i.id}> {i.value}</MenuItem>)}
+            </Select>
+            }
             {/*해당 질문 클릭시에만 표시됨*/}
             {value==='write' && info.activated &&
                 <FlexLeftRow paddingLeft={0}>

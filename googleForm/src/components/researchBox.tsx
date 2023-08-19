@@ -4,7 +4,7 @@ import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
 import {useAppDispatch, useAppSelector} from "../research/config";
 import {setForm} from "../research/slices/formSlice";
 import {TextField, Typography} from "@mui/material";
-import {ResearchBottomSection, OptionType, AnswerTypeSelect, TextAnswerType} from "../compoents";
+import {ResearchBottomSection, OptionType, AnswerTypeSelect, TextAnswerType} from "./";
 
 export interface ResearchBoxInfo {
     id : number;

@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect, useState} from "react";
-import {MenuBar, ResearchBox, SubmitSection, TitleSection} from "../../compoents";
-import * as style from "../../compoents/ComponentStyle";
+import {MenuBar, ResearchBox, SubmitSection, TitleSection} from "../../components";
+import * as style from "../../components/ComponentStyle";
 import {FormSection} from "./formStyle";
 import {useAppDispatch, useAppSelector} from "../../research/config";
 import {setForm, FormItem} from "../../research/slices/formSlice";

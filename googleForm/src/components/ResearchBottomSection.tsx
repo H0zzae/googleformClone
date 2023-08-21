@@ -1,4 +1,4 @@
-import React, {useCallback} from "react"
+import React, {useCallback, useEffect, useState} from "react"
 import {IconButton, Menu, MenuItem, Switch,FormControlLabel} from "@mui/material";
 import Divider from "@mui/material/Divider";
 import MoreVertIcon from '@mui/icons-material/MoreVert';
@@ -22,7 +22,7 @@ const shuffles = ['옵션 순서 무작위로 섞기']
 export const ResearchBottomSection = (info:BottomSectionInfo) =>{
     const {formList} = useAppSelector(state => state.form);
     const dispatch = useAppDispatch();
-
+    const [necessary, setNescessary] = useState<boolean>(false);
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
     const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -31,6 +31,13 @@ export const ResearchBottomSection = (info:BottomSectionInfo) =>{
     const handleClose = () => {
         setAnchorEl(null);
     };
+    useEffect(() => {
+        const targetIDX = formList.findIndex((i) => i.id ===info.id);
+        const targetItem = formList[targetIDX];
+        if (targetItem?.necessary!==undefined){
+            setNescessary(targetItem?.necessary);
+        }
+    }, [formList]);
     const RemoveForm = useCallback((id : number) => {
         const setFormList = [...formList];
         const removeIndex = setFormList.findIndex(item => item.id === id);
@@ -67,7 +74,7 @@ export const ResearchBottomSection = (info:BottomSectionInfo) =>{
                     <FlexRightRow>
                         <FormControlLabel
                             value="necessary"
-                            control={<Switch color="primary" onChange={handleSwitch}/>}
+                            control={<Switch color="primary" checked={necessary} onChange={handleSwitch}/>}
                             label="필수"
                             labelPlacement="start"
                         />

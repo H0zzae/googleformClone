@@ -1,6 +1,7 @@
-import React, {ChangeEvent, useCallback, useState} from "react";
+import React, {ChangeEvent, useCallback, useEffect, useState} from "react";
 import {FlexLeftRow, RedText,ResearchDiv, BlueBox} from "./ComponentStyle";
 import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import {useAppDispatch, useAppSelector} from "../research/config";
 import {setForm} from "../research/slices/formSlice";
 import {TextField, Typography} from "@mui/material";
@@ -13,13 +14,23 @@ export interface ResearchBoxInfo {
     disable : boolean;
     checked : boolean;
     activated : boolean;
+    status : boolean;
 }
 
 
 export const ResearchBox = (researchBoxInfo:ResearchBoxInfo)=> {
     const {formList} = useAppSelector(state => state.form);
     const dispatch = useAppDispatch();
+    const {value} = useAppSelector(state => state.user);
+
     const [itemTitle, setTitle] = useState<string>(researchBoxInfo.title || '이름');
+    const [filled, setFilled] = useState<boolean>(true);
+
+    useEffect(() => {
+        const targetIDX = formList.findIndex((i) => i.id ===researchBoxInfo.id);
+        const targetItem = formList[targetIDX];
+        setFilled(targetItem?.status);
+    }, [formList]);
 
     const onChangeTitle = useCallback((event:ChangeEvent<HTMLInputElement>) => {
         setTitle(event.target.value);
@@ -43,7 +54,7 @@ export const ResearchBox = (researchBoxInfo:ResearchBoxInfo)=> {
     },[dispatch, formList])
 
     return (
-        <ResearchDiv onClick={handleFocusEvent} activated={researchBoxInfo.activated}>
+        <ResearchDiv onClick={handleFocusEvent} activated={researchBoxInfo.activated} status={researchBoxInfo.status}>
             {!researchBoxInfo.disable && researchBoxInfo.activated && <BlueBox/>}
             {!researchBoxInfo.disable && researchBoxInfo.activated?
                 <FlexLeftRow justifyContent={'space-between'} gap={8}>
@@ -68,10 +79,15 @@ export const ResearchBox = (researchBoxInfo:ResearchBoxInfo)=> {
                 </div>
             }
             {researchBoxInfo.type?.includes('Answer')?
-                <TextAnswerType disable={researchBoxInfo.disable} id={researchBoxInfo.id} type={researchBoxInfo.type}/>
+                <TextAnswerType disable={researchBoxInfo.disable} id={researchBoxInfo.id} type={researchBoxInfo.type} necessary={filled}/>
             :
                 <OptionType type={researchBoxInfo.type} id={researchBoxInfo.id} activated={researchBoxInfo.activated}/>
             }
+            {!filled && value==='preview' &&
+            <FlexLeftRow gap={12}>
+                <ErrorOutlineIcon color={'error'}/>
+                <Typography variant={'body2'} sx={{color:'#d93025', fontSize:'12px'}}>필수 질문입니다.</Typography>
+            </FlexLeftRow>}
 
             {!researchBoxInfo.disable && researchBoxInfo.activated &&
             <ResearchBottomSection id={researchBoxInfo.id} checked={researchBoxInfo.checked}/>

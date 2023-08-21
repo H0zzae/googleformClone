@@ -8,6 +8,7 @@ interface shortAnswerInfo {
     id : number;
     type ?: string;
     disable : boolean;
+    necessary : boolean;
 }
 
 export const TextAnswerType = (info:shortAnswerInfo) => {
@@ -37,6 +38,7 @@ export const TextAnswerType = (info:shortAnswerInfo) => {
                            value={text}
                            onChange={handleTextChange}
                            sx={{margin: '9px 0', width: info.type==='shortAnswer' ? 360 : '100%'}}
+                           error={!info.necessary}
                     />
                     : <Typography>{text}</Typography>}
                 </FlexLeftRow>

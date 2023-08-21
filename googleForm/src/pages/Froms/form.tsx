@@ -32,7 +32,7 @@ const Form = () =>{
 
     // 브라우저 상에 보여지는 데이터 리스트
     const dragListRow = (record: any, index: number) => (
-        <ResearchBox key={index} id={record.id} type={record.type} disable={value!=='write'} checked={record.necessary} activated={record.activated}/>
+        <ResearchBox key={index} id={record.id} type={record.type} disable={value!=='write'} checked={record.necessary} activated={record.activated} status={record.status}/>
         // 여기서 record는 dataSource
     );
     return(

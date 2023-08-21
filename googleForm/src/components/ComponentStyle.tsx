@@ -24,9 +24,9 @@ export const PurpleLineDiv = styled.div`
   top: 0;
   border-radius: 8px 8px 0 0;
 `;
-export const ResearchDiv = styled.div<{ activated?: boolean }>`
+export const ResearchDiv = styled.div<{ activated?: boolean, status?: boolean }>`
   position: relative;
-  border: 1px solid #dadce0;
+  border:${props => props.status!==false ? '1px solid #dadce0' : '1px solid #d93025'};
   background-color : #fff;
   margin-top: 12px;
   //activate

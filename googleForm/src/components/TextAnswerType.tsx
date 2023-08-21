@@ -1,31 +1,51 @@
-import React, {ChangeEvent, useCallback, useState} from "react"
+import React, {ChangeEvent, useCallback, useEffect, useState} from "react"
 import {FlexLeftRow, FlexTopColumn} from "./ComponentStyle";
 import {useAppDispatch, useAppSelector} from "../research/config";
 import {Input, Typography} from "@mui/material";
-import {setForm} from "../research/slices/formSlice";
+import {FormItem, setForm} from "../research/slices/formSlice";
+import OptionsHooks from "./optionsHooks";
 
 interface shortAnswerInfo {
     id : number;
     type ?: string;
     disable : boolean;
-    necessary : boolean;
+    status : boolean;
 }
 
 export const TextAnswerType = (info:shortAnswerInfo) => {
     const {formList} = useAppSelector(state => state.form);
     const dispatch = useAppDispatch();
     const {value} = useAppSelector(state => state.user);
+    const optionsFn = OptionsHooks(info.id);
     const [text, setText] = useState<string>(formList.map((i) => {
         if (i.id === info.id) return i })[0]?.subject || '');
+    const [currentList, setCurrentList] = useState<FormItem[]>(formList);
+    useEffect(() => {
+        setCurrentList(formList);
+    }, [formList]);
 
     const handleTextChange = useCallback((event : ChangeEvent<HTMLInputElement>) => {
-        const changed = formList.map((i) => {
-            if (i.id === info.id) {
-                return {...i, subject: event.target.value}
-            } else return {...i}
-        })
-        dispatch(setForm(changed))
-        setText(event.target.value);
+        const cpFormList = currentList;
+        if (info.status) {
+            const changed = cpFormList.map((i) => {
+                if (i.id === info.id) {
+                    return {...i, subject: event.target.value}
+                } else return i
+            })
+            console.log(info.status , "changed\n", cpFormList, changed);
+            dispatch(setForm(changed))
+            setText(event.target.value);
+        }else {
+            const check = event.target.value.length>0;
+            const changed = cpFormList.map((i) => {
+                if (i.id === info.id) {
+                    return {...i, subject: event.target.value, status : check}
+                } else return i
+            })
+            console.log("changed\n", changed);
+            dispatch(setForm(changed))
+            setText(event.target.value);
+        }
     },[dispatch])
     return (
         <>
@@ -38,7 +58,7 @@ export const TextAnswerType = (info:shortAnswerInfo) => {
                            value={text}
                            onChange={handleTextChange}
                            sx={{margin: '9px 0', width: info.type==='shortAnswer' ? 360 : '100%'}}
-                           error={!info.necessary}
+                           error={value==='preview' ? !info.status : false}
                     />
                     : <Typography>{text}</Typography>}
                 </FlexLeftRow>

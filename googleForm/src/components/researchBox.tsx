@@ -54,7 +54,7 @@ export const ResearchBox = (researchBoxInfo:ResearchBoxInfo)=> {
     },[dispatch, formList])
 
     return (
-        <ResearchDiv onClick={handleFocusEvent} activated={researchBoxInfo.activated} status={researchBoxInfo.status}>
+        <ResearchDiv onClick={handleFocusEvent} activated={researchBoxInfo.activated} status={value=='preview' ? researchBoxInfo.status: true}>
             {!researchBoxInfo.disable && researchBoxInfo.activated && <BlueBox/>}
             {!researchBoxInfo.disable && researchBoxInfo.activated?
                 <FlexLeftRow justifyContent={'space-between'} gap={8}>
@@ -79,7 +79,7 @@ export const ResearchBox = (researchBoxInfo:ResearchBoxInfo)=> {
                 </div>
             }
             {researchBoxInfo.type?.includes('Answer')?
-                <TextAnswerType disable={researchBoxInfo.disable} id={researchBoxInfo.id} type={researchBoxInfo.type} necessary={filled}/>
+                <TextAnswerType disable={researchBoxInfo.disable} id={researchBoxInfo.id} type={researchBoxInfo.type} status={filled}/>
             :
                 <OptionType type={researchBoxInfo.type} id={researchBoxInfo.id} activated={researchBoxInfo.activated}/>
             }

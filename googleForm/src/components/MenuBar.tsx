@@ -31,6 +31,7 @@ export const MenuBar = () => {
             activated : true,
             necessary : false,
             status : true,
+            etc : false,
         };
         const prevForm = formList.map((i) => {
             if(i.activated){

@@ -110,7 +110,7 @@ export const MultipleChoiceOption = (info : optionInfo) => {
                                        }}
                             />
                             <Typography variant={"body1"}> 또는 </Typography>
-                            <Button variant={"text"} size={"small"} sx={{color: "#1976d2"}} onClick={addETC}>'기타' 추가</Button>
+                            <Button variant={"text"} size={"small"} sx={{color: "#1976d2"}} onClick={optionsfun.addETC}>'기타' 추가</Button>
                         </FlexLeftRow>
                     </FlexLeftRow>
                 }

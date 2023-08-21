@@ -11,6 +11,7 @@ export interface FormItem {
     activated : boolean,
     necessary : boolean,
     status : boolean, // 0 : error, 1 : pass
+    etc : boolean,
 }
 
 export interface CommonState {

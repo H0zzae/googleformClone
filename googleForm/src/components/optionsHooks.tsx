@@ -12,6 +12,16 @@ const OptionsHooks = (id : number) => {
     const [optionList, setOptionList] = useState<any[]>([]);
     const defaultText = "옵션 "
 
+    const loadFormList = () => {
+        return [...formList]
+    }
+
+    const currentTargetItem = () => {
+        const targetIdx = formList.findIndex((i) => i.id ===id)
+        const targetForm = formList[targetIdx];
+        return [targetForm];
+    }
+
     const currentOption = () => {
         const targetIdx = formList.findIndex((i) => i.id ===id)
         const targetForm = formList[targetIdx];
@@ -77,6 +87,26 @@ const OptionsHooks = (id : number) => {
         const changed = prevOption.map((i) => {return {...i, selected : false}})
         saveModOption(changed);
     },[dispatch, formList])
+
+    const addETC = useCallback(() => {
+        const prevForm = loadFormList();
+        const changed = prevForm.map((i) => {
+            if (i.id === id) {
+                return {...i, etc : true};
+            }else return i
+        })
+        dispatch(setForm(changed));
+    },[dispatch, formList]);
+
+    const removeETC = useCallback(() => {
+        const prevForm = loadFormList();
+        const changed = prevForm.map((i) => {
+            if (i.id === id) {
+                return {...i, etc : false};
+            }else return i
+        })
+        dispatch(setForm(changed));
+    },[dispatch, formList])
     return {calMaxNum,
         currentOption,
         saveModOption,
@@ -84,7 +114,11 @@ const OptionsHooks = (id : number) => {
         addOptionValue,
         addOptionValueWithKeyBoard,
         removeOption,
-        resetOptionSelected
+        resetOptionSelected,
+        loadFormList,
+        currentTargetItem,
+        addETC,
+        removeETC
     }
 }
 export default OptionsHooks;

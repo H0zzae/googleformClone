@@ -6,7 +6,7 @@ export interface optionInfo {
     type ?: string;
     activated : boolean;
 }
-const OptionsHooks = (id : number) => {
+const useOptionsHooks = (id : number) => {
     const {formList} = useAppSelector(state => state.form);
     const dispatch = useAppDispatch();
     const [optionList, setOptionList] = useState<any[]>([]);
@@ -121,4 +121,4 @@ const OptionsHooks = (id : number) => {
         removeETC
     }
 }
-export default OptionsHooks;
+export default useOptionsHooks;

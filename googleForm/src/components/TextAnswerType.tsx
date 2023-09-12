@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useCallback, useEffect, useState} from "react"
+import React, {ChangeEvent, useCallback, useEffect, useMemo, useState} from "react"
 import {FlexLeftRow, FlexTopColumn} from "./ComponentStyle";
 import {useAppDispatch, useAppSelector} from "../research/config";
 import {Input, Typography} from "@mui/material";
@@ -16,23 +16,17 @@ export const TextAnswerType = (info:shortAnswerInfo) => {
     const {formList} = useAppSelector(state => state.form);
     const dispatch = useAppDispatch();
     const {value} = useAppSelector(state => state.user);
-    const optionsFn = OptionsHooks(info.id);
+    const optionsFn = useOptionsHooks(info.id);
     const [text, setText] = useState<string>(formList.map((i) => {
         if (i.id === info.id) return i })[0]?.subject || '');
-    const [currentList, setCurrentList] = useState<FormItem[]>(formList);
-    useEffect(() => {
-        setCurrentList(formList);
-    }, [formList]);
-
     const handleTextChange = useCallback((event : ChangeEvent<HTMLInputElement>) => {
-        const cpFormList = currentList;
+        const cpFormList = formList;
         if (info.status) {
             const changed = cpFormList.map((i) => {
                 if (i.id === info.id) {
                     return {...i, subject: event.target.value}
                 } else return i
             })
-            console.log(info.status , "changed\n", cpFormList, changed);
             dispatch(setForm(changed))
             setText(event.target.value);
         }else {
@@ -42,11 +36,10 @@ export const TextAnswerType = (info:shortAnswerInfo) => {
                     return {...i, subject: event.target.value, status : check}
                 } else return i
             })
-            console.log("changed\n", changed);
             dispatch(setForm(changed))
             setText(event.target.value);
         }
-    },[dispatch])
+    },[formList, dispatch])
     return (
         <>
             <FlexTopColumn>

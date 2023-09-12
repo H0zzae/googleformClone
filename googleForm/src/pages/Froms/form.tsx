@@ -12,27 +12,22 @@ const Form = () =>{
     const dispatch = useAppDispatch();
     const [dragList, setDragList] = useState<FormItem[]>(formList);
     useEffect(() => {
-        console.log("formList\n", formList);
         setDragList([...formList]);
     }, [formList, dispatch]);
 
-    useEffect(() => {
-        // console.log("dragList : ", dragList);
-    }, [dragList]);
 
     const handleUpdate = useCallback((evt: any, updated: any) => {
         //console.log(evt); // tslint:disable-line
-        //console.log("updated: \n",updated); // tslint:disable-line
         const orderList = [...updated].map((item, idx) => {
             return {...item, order: idx}
         });
-        setDragList(orderList);
+        console.log("updated: \n",updated, "\n orderList : \n", orderList); // tslint:disable-line
         dispatch(setForm(orderList));
-    },[dispatch])
+    },[formList, dispatch])
 
     // 브라우저 상에 보여지는 데이터 리스트
     const dragListRow = (record: any, index: number) => (
-        <ResearchBox key={index} id={record.id} type={record.type} disable={value!=='write'} checked={record.necessary} activated={record.activated} status={record.status}/>
+        <ResearchBox key={index} title={record.title} id={record.id} type={record.type} disable={value!=='write'} checked={record.necessary} activated={record.activated} status={record.status}/>
         // 여기서 record는 dataSource
     );
     return(

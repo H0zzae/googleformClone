@@ -30,7 +30,7 @@ export const ResearchBox = (researchBoxInfo:ResearchBoxInfo)=> {
         const targetIDX = formList.findIndex((i) => i.id ===researchBoxInfo.id);
         const targetItem = formList[targetIDX];
         setFilled(targetItem?.status);
-    }, [formList]);
+    }, [dispatch, formList]);
 
     const onChangeTitle = useCallback((event:ChangeEvent<HTMLInputElement>) => {
         setTitle(event.target.value);

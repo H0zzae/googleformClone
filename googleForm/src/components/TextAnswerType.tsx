@@ -3,7 +3,7 @@ import {FlexLeftRow, FlexTopColumn} from "./ComponentStyle";
 import {useAppDispatch, useAppSelector} from "../research/config";
 import {Input, Typography} from "@mui/material";
 import {FormItem, setForm} from "../research/slices/formSlice";
-import OptionsHooks from "./optionsHooks";
+import useOptionsHooks from "./useOptionsHooks";
 
 interface shortAnswerInfo {
     id : number;

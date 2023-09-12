@@ -14,7 +14,7 @@ import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
 import ClearIcon from '@mui/icons-material/Clear';
 import Tooltip from "@mui/material/Tooltip";
 import {useAppDispatch, useAppSelector} from "../research/config";
-import OptionsHooks, {optionInfo} from "./optionsHooks";
+import useOptionsHooks, {optionInfo} from "./useOptionsHooks";
 
 export const MultipleChoiceOption = (info : optionInfo) => {
     const {formList} = useAppSelector(state => state.form);
@@ -23,7 +23,7 @@ export const MultipleChoiceOption = (info : optionInfo) => {
     const [newInputText, setNewInputText] = useState<string>();
     const [checkedValue, setCheckedValue] = useState<string>('undefined');
     const [optionList, setOptionList] = useState<any[]>([]);
-    const optionsfun = OptionsHooks(info.id);
+    const optionsfun = useOptionsHooks(info.id);
 
     useEffect(() => {
         setOptionList(optionsfun.currentOption())

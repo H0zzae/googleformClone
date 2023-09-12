@@ -4,7 +4,7 @@ import {IconButton, Input, MenuItem, Select, SelectChangeEvent, TextField, Typog
 import Tooltip from "@mui/material/Tooltip";
 import ClearIcon from "@mui/icons-material/Clear";
 import {useAppDispatch, useAppSelector} from "../research/config";
-import OptionsHooks, {optionInfo} from "./optionsHooks";
+import useOptionsHooks, {optionInfo} from "./useOptionsHooks";
 import Divider from "@mui/material/Divider";
 
 
@@ -17,10 +17,10 @@ export const DropDownOption = (info:optionInfo) => {
     const [optionList, setOptionList] = useState<any[]>([]);
     const [answer, setAnswer] = useState<string>('');
     const [answerValue, setAnswerValue] = useState<string>('');
-    const optionsfun = OptionsHooks(info.id);
+    const optionsfun = useOptionsHooks(info.id);
 
     useEffect(() => {
-        setOptionList(optionsfun.currentOption())
+        setOptionList(optionsfun.currentOption)
         setNewInputText('');
     }, [formList, dispatch]);
 
